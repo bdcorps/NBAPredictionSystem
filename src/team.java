@@ -21,17 +21,18 @@ public class Team {
   	private int threeptAttempt; //3ptrs attempted
 	//efficiency
 	private double win_loss = wins / gPlay;//winning percentage
-	private double ppg = gPlay / points; //point int per game
- 	private double rpg = gPlay / offRebounds; //offensive rebounds per game
- 	private double rpg = gPlay / defRebounds; //defensiverebounds per game
-	private double apg = gPlay / assists; //assists per game
- 	private double spg = gPlay / steals; //steals per game
- 	private double bpg = gPlay / block; //blocks per game
- 	private double fpg = gPlay / fouls; //fouls per game
- 	private double tpg = gPlay / turnovers; //turnovers per game
- 	private double fgPercent = fgMade / fgAttempt; //field goal percentage
- 	private double ftPercent = ftMade / ftAttempt; //free throw percentage
- 	private double threeptPercent = threeptMade / threeptAttempt; //3 point percentage
+	private double ppg = (points / gPlay) *100; //point int per game
+ +	private double rpg = (rebounds / gPlay) *100; //total rebounds per game
+  +	private double oRpg = (offRebounds / gPlay) *100; //offensive rebounds per game
+ +	private double dRpg = (defRebounds / gPlay) *100; //defensive rebounds per game
+ +	private double apg = (assists / gPlay) *100; //assists per game
+ +	private double spg = (steals / gPlay) *100; //steals per game
+ +	private double bpg = (blocks / gPlay) *100; //blocks per game
+ +	private double fpg = (fouls / gPlay) *100; //fouls per game
+ +	private double tpg = (turnovers / gPlay) *100; //turnovers per game
+ +	private double fgPercent = (fgMade / fgAttempt) *100; //field goal percentage
+ +	private double ftPercent = (ftMade / ftAttempt) *100; //free throw percentage
+ +	private double threeptPercent = (threeptMade / threeptAttempt) *100; //3 point percentage
 	
 	private boolean divLeader; //division leader (true =division leader)
 
