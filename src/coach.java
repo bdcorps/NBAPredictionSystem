@@ -1,4 +1,4 @@
-public class Coach extends Person {
+public class coach extends person {
 	private int S_wins; //total regular season wins 
 	private int S_losses; //total regular season losses
 	private int S_games; //total regular season games coached

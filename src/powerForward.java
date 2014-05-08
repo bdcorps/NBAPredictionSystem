@@ -1,4 +1,3 @@
-
-public class powerForward extends Forward {
+public class powerForward extends forward {
 
 }

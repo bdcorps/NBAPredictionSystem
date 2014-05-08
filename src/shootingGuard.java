@@ -1,4 +1,4 @@
 
-public class shootingGuard extends Guard  {
+public class shootingGuard extends guard  {
 
 }

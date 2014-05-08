@@ -1,4 +1,4 @@
 
-public class smallForward extends Forward {
+public class smallForward extends forward {
 
 }

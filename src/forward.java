@@ -1,4 +1,4 @@
 
-public class Forward extends Player {
+abstract class forward extends player {
 
 }

@@ -1,4 +1,4 @@
 
-public class pointGuard extends Guard {
+public class pointGuard extends guard {
 
 }

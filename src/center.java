@@ -1,4 +1,4 @@
 
-public class Center extends Player{
+public class center extends player{
 
 }

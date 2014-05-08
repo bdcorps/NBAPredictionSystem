@@ -1,4 +1,4 @@
-abstract class Person {
+abstract class person {
 	private String name; //Name
 	private int age; //Age 
 	private double height; //Height in cm

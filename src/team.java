@@ -1,5 +1,5 @@
 
-public class Team {
+public class team {
 	private int wins; //regular season wins
 	private int losses; //regular season losses
 	private int seed ; //playoff seed(1-8)

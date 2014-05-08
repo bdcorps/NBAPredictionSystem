@@ -1,4 +1,3 @@
 
-public class Guard extends Player {
-
+abstract class guard extends player {
 }
