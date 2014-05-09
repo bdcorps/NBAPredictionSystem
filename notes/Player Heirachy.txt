@@ -1,0 +1,34 @@
+player heirachy:
+team : name
+team : alias
+team : id
+team : market
+team : name
+total : assists
+total : assists_turnover_ratio
+total : blocked_att
+total : blocks
+total : defensive_rebounds
+total : field_goals_att
+total : field_goals_made
+total : flagrant_fouls
+total : free_throws_att
+total : free_throws_made
+total : games_played
+total : games_started
+total : minutes
+total : offensive_rebounds
+total : personal_fouls
+total : points
+total : rebounds
+total : steals
+total : tech_fouls
+total : three_points_att
+total : three_points_made
+total : turnovers
+total : two_points_att
+total : two_points_made
+team : alias
+team : id
+team : market
+[Knicks, NYK, 583ec70e-fb46-11e1-82cb-f4ce4684ea4c, New York, Knicks, 4, 0.4, 0, 0, 9, 38, 16, 0, 12, 8, 19, 0, 148.0, 6, 12, 40, 15, 12, 0, 0, 0, 10, 38, 16]
