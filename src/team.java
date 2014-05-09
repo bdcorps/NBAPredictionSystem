@@ -20,7 +20,7 @@ public class Team {
   	private int threeptMade; //3ptrs made
   	private int threeptAttempt; //3ptrs attempted
 	//efficiency
-	private double win_loss = wins / gPlay;//winning percentage
+	private double win_loss = (wins / gPlay)*100;//winning percentage
 	private double ppg = (points / gPlay) *100; //point int per game
  +	private double rpg = (rebounds / gPlay) *100; //total rebounds per game
   +	private double oRpg = (offRebounds / gPlay) *100; //offensive rebounds per game
