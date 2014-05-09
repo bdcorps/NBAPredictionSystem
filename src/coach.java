@@ -1,5 +1,8 @@
+
+
 public class couch {
 	public class Coach extends Person {
+		private String team;
 		private int S_wins; //total regular season wins 
 		private int S_losses; //total regular season losses
 		private int S_games; //total regular season games coached
@@ -8,6 +11,34 @@ public class couch {
 		private int PF_game; //total play games coached
 		private int exp; //years of coaching experience
 		private int championships; //number of championships
+		
+		public Coach(String team){
+		
+		FileReader fr=new FileReader("**COACHES DIRECTORY");  
+		BufferedReader br = new BufferedReader(fr);
+		
+		while ((br.readLine()) == team){	
+				putTeam(br.readLine());
+			}
+		
+		setS_wins(Integer.parseInt(br.readLine()));
+		setS_losses(Integer.parseInt(br.readLine()));
+		setS_games(Integer.parseInt(br.readLine()));
+		setPF_Wins(Integer.parseInt(br.readLine()));
+		setPF_losses(Integer.parseInt(br.readLine()));
+		setPF_game(Integer.parseInt(br.readLine()));
+		setExp(Integer.parseInt(br.readLine()));
+		setChampionships(Integer.parseInt(br.readLine()));
+		br.close();
+		}
+		
+		public String getTeam() {
+			return team;
+		}
+		public void setTeam(String team) {
+			team = team ;
+		}
+		
 		public int getS_wins() {
 			return S_wins;
 		}
@@ -56,8 +87,6 @@ public class couch {
 		public void setChampionships(int championships) {
 			this.championships = championships;
 		}
-
 		
-
 	}
 }
