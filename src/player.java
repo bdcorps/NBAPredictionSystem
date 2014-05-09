@@ -1,4 +1,4 @@
-abstract class player {
+abstract class player extends person{
 	private double salary; //Salary per year 
 	private int gPlay; //Games played 
 	private int gStart; //Games started
