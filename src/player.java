@@ -1,4 +1,4 @@
-public class player {
+abstract class player {
 	private double salary; //Salary per year 
 	private int gPlay; //Games played 
 	private int gStart; //Games started
