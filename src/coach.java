@@ -36,44 +36,44 @@ public class couch {
 			return team;
 		}
 		public void setTeam(String team) {
-			team = team ;
+			this.team = team ;
 		}
 		
 		public int getS_wins() {
 			return S_wins;
 		}
 		public void setS_wins(int s_wins) {
-			S_wins = s_wins;
+			this.S_wins = s_wins;
 		}
 		public int getS_losses() {
 			return S_losses;
 		}
 		public void setS_losses(int s_losses) {
-			S_losses = s_losses;
+			this.S_losses = s_losses;
 		}
 		public int getS_games() {
 			return S_games;
 		}
 		public void setS_games(int s_games) {
-			S_games = s_games;
+			this.S_games = s_games;
 		}
 		public int getPF_wins() {
 			return PF_wins;
 		}
 		public void setPF_wins(int pF_wins) {
-			PF_wins = pF_wins;
+			this.PF_wins = pF_wins;
 		}
 		public int getPF_losses() {
 			return PF_losses;
 		}
 		public void setPF_losses(int pF_losses) {
-			PF_losses = pF_losses;
+			this.PF_losses = pF_losses;
 		}
 		public int getPF_game() {
 			return PF_game;
 		}
 		public void setPF_game(int pF_game) {
-			PF_game = pF_game;
+			this.PF_game = pF_game;
 		}
 		public int getExp() {
 			return exp;
