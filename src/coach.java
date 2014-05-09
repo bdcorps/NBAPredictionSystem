@@ -1,19 +1,9 @@
-<<<<<<< HEAD
-public class coach extends person {
-	private int S_wins; //total regular season wins 
-	private int S_losses; //total regular season losses
-	private int S_games; //total regular season games coached
-	private int PF_wins; //total playoff wins 
-	private int PF_losses; //total playoff losses
-	private int PF_game; //total play games coached
-	private int exp; //years of coaching experience
-	private int championships; //number of championships
-}
-=======
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
 
-
-public class couch {
-	public class Coach extends Person {
+	public class coach extends person {
 		private String team;
 		private int S_wins; //total regular season wins 
 		private int S_losses; //total regular season losses
@@ -24,24 +14,30 @@ public class couch {
 		private int exp; //years of coaching experience
 		private int championships; //number of championships
 		
-		public Coach(String team){
+		public coach(String team){
 		
-		FileReader fr=new FileReader("**COACHES DIRECTORY");  
+		FileReader fr;
+		try {
+			fr = new FileReader("/coachData.txt");
+		 
 		BufferedReader br = new BufferedReader(fr);
 		
 		while ((br.readLine()) == team){	
-				putTeam(br.readLine());
+				setTeam(br.readLine());
 			}
 		
 		setS_wins(Integer.parseInt(br.readLine()));
 		setS_losses(Integer.parseInt(br.readLine()));
 		setS_games(Integer.parseInt(br.readLine()));
-		setPF_Wins(Integer.parseInt(br.readLine()));
+		setPF_wins(Integer.parseInt(br.readLine()));
 		setPF_losses(Integer.parseInt(br.readLine()));
 		setPF_game(Integer.parseInt(br.readLine()));
 		setExp(Integer.parseInt(br.readLine()));
 		setChampionships(Integer.parseInt(br.readLine()));
-		br.close();
+		br.close();} catch (NumberFormatException | IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} 
 		}
 		
 		public String getTeam() {
@@ -101,5 +97,3 @@ public class couch {
 		}
 		
 	}
-}
->>>>>>> ca42378dcdd75d05b7e7f2b925079a0f760fb055

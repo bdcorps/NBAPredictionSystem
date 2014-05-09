@@ -1,14 +1,11 @@
-<<<<<<< HEAD
-abstract class player extends person {
-=======
 abstract class player extends person{
->>>>>>> ca42378dcdd75d05b7e7f2b925079a0f760fb055
-	private double salary; //Salary per year 
+	//private double salary; //Salary per year 
+	private int experience;
+	private int assist_turnover;
 	private int gPlay; //Games played 
 	private int gStart; //Games started
 	private int minutesPlayed; //total mins played season
 	private String team; //team name
-	private boolean handed; //Right, true
 	private int number; //Jersey 
 	private int points;//points
 	private int assists;//assists
@@ -16,37 +13,194 @@ abstract class player extends person{
 	private int offRebounds;//offensive rebounds
  	private int defRebounds;//defensive rebounds
 	private int steals;//steals
+	private int blockAttempt;//blocks attempted
 	private int blocks;//block
-	private int fouls;//fouls
+	
+	private int flagrantFouls;
+	private int personalFouls;//fouls
+	private int techFouls;//fouls
 	private int turnovers;//points
 	private int fgMade; //field goals made
 	private int fgAttempt; //field goals attempted
 	private int ftMade; //free throws made
 	private int ftAttempt; //free throws attempted
+	private int twoptMade; //2ptrs made
+	private int twoptAttempt; //2ptrs attempted
 	private int threeptMade; //3ptrs made
 	private int threeptAttempt; //3ptrs attempted
+	
 	//efficieny ratings
-	private double ppg = (points / gPlay) *100; //point int per game
-	private double rpg = (rebounds / gPlay) *100; //rebounds per game
-	private double oRpg = (offRebounds / gPlay) *100; //offensive rebounds per game
- +	private double dRpg = (defRebounds / gPlay) *100; //defensive rebounds per game
-	private double apg = (assists / gPlay) *100; //assists per game
-	private double spg = (steals / gPlay) *100; //steals per game
-	private double bpg = (blocks / gPlay) *100; //blocks per game
-	private double fpg = (fouls / gPlay) *100; //fouls per game
-	private double tpg = (turnovers / gPlay) *100; //turnovers per game
-	private double minPG = (minutesPlayed / gPlay) *100; //minutes played per game
-	private double fgPercent = (fgMade / fgAttempt) *100; //field goal percentage
-	private double ftPercent = (ftMade / ftAttempt) *100; //free throw percentage
-	private double threeptPercent = (threeptMade / threeptAttempt) *100; //3 point percentage
+	private double ppg; //point int per game
+	private double rpg; //rebounds per game
+	private double oRpg; //offensive rebounds per game
+ 	private double dRpg; //defensive rebounds per game
+	private double apg; //assists per game
+	private double spg; //steals per game
+	
+	//check the blocks: should there be bpg or blockPercent
+	private double bpg; //blocks per game
+	private double blockPercent;
+	///
+	
+	//all fouls added
+	private double fpg; //fouls per game
+	private double tpg; //turnovers per game
+	private double minPG; //minutes played per game
+	private double fgPercent; //field goal percentage
+	private double ftPercent; //free throw percentage
+	private double threeptPercent; //3 point percentage
+
+	private double twoptPercent; //3 point percentage
+
 	//player plus/minus excluded from this
 	private double rating;
+
+	
+	public void printPlayer(){
+		System.out.println("Name: " + name);
+		System.out.println("Height: " + height);
+		System.out.println("Weight: " + weight);
+		System.out.println("Birthday: " + birthdate );
+		System.out.println("Birthplace: " + birthPlace );	
+	}
+	
+	
+	public void printStats(){
+		System.out.println("Games Played: " + gPlay);
+		System.out.println("Games Started: " + gStart);
+	//	System.out.println("Total Minutes Played: " + minutesPlay);
+		System.out.println("Team: " + team);
+		System.out.println("Jersey Number: " + number);
+		System.out.println("Points: " + points);
+		System.out.println("Assists: " + assists);
+		System.out.println("Rebounds: " + rebounds);
+		System.out.println("Offensive Rebounds: " + offRebounds);
+		System.out.println("Defensive Rebounds: " + defRebounds);
+		System.out.println("Steals: " + steals);
+		System.out.println("Blocks: " + blocks);
+		//6System.out.println("Fouls: " + fouls);
+		System.out.println("Turnovers: " + turnovers);
+		System.out.println("Field Goals Made: " + fgMade);
+		System.out.println("Field Goals Attempted: " + fgAttempt);
+		System.out.println("Free Throws Made: " + ftMade);
+		System.out.println("Free Throws Attempted: " + ftAttempt);
+		System.out.println("Three Points Made: " + threeptMade);
+		System.out.println("PPG: " + ppg );
+		System.out.println("APG: " + apg);
+		System.out.println("RPG: " + rpg);
+		System.out.println("Offensive RPG: " + oRpg );
+		System.out.println("Defensive RPG: " + dRpg);
+		System.out.println("BPG: " + bpg );
+		System.out.println("FPG: " + fpg);
+		//System.out.println("TPG: " + );
+		System.out.println("Minutes Played Per Game: " + minPG);
+		System.out.println("FG Percentage: " + fgPercent );
+		System.out.println("FT Percentage: " + ftPercent );
+		System.out.println("3PT Percentage: " + threeptPercent );
+	}
+	
+	
+public void calculateEfficiency(){
+	//TO DO - check zero
+	
+	
+	
+	try{
+	//efficieny ratings
+		 ppg = (points / gPlay) *100; //point int per game
+		 rpg = (rebounds / gPlay) *100; //rebounds per game
+		 oRpg = (offRebounds / gPlay) *100; //offensive rebounds per game
+	 	 dRpg = (defRebounds / gPlay) *100; //defensive rebounds per game
+		 apg = (assists / gPlay) *100; //assists per game
+		 spg = (steals / gPlay) *100; //steals per game
+		
+		//check the blocks: should there be bpg or blockPercent
+		 bpg = (blocks / gPlay) *100; //blocks per game
+		 blockPercent = (blocks/blockAttempt)*100;
+		///
+		
+		//all fouls added
+		 fpg = ((flagrantFouls+techFouls+personalFouls) / gPlay) *100; //fouls per game
+		 tpg = (turnovers / gPlay) *100; //turnovers per game
+		 minPG = (minutesPlayed / gPlay) *100; //minutes played per game
+		 fgPercent = (fgMade / fgAttempt) *100; //field goal percentage
+		 ftPercent = (ftMade / ftAttempt) *100; //free throw percentage
+		 threeptPercent = (threeptMade / threeptAttempt) *100; //3 point percentage
+
+		 twoptPercent = (twoptMade / twoptAttempt) *100; //3 point percentage
+	}
+	catch (java.lang.ArithmeticException ex){
+		
+		
+		
+		
+		
+		
+		
+		
+	}
+}
+	
+	public player(){	
+	
+	
+}
+
+
+	public int getTwoptMade() {
+		return twoptMade;
+	}
+	public void setTwoptMade(int twoptMade) {
+		this.twoptMade = twoptMade;
+	}
+	public int getTwoptAttempt() {
+		return twoptAttempt;
+	}
+	public void setTwoptAttempt(int twoptAttempt) {
+		this.twoptAttempt = twoptAttempt;
+	}
+	public int getFlagrantFouls() {
+		return flagrantFouls;
+	}
+	public int getBlockAttempt() {
+		return blockAttempt;
+	}
+	public void setBlockAttempt(int blockAttempt) {
+		this.blockAttempt = blockAttempt;
+	}
+	public double getBlockPercent() {
+		return blockPercent;
+	}
+	public void setFlagrantFouls(int falgrantFouls) {
+		this.flagrantFouls = flagrantFouls;
+	}
+	public int getPersonalFouls() {
+		return personalFouls;
+	}
+	public void setPersonalFouls(int personalFouls) {
+		this.personalFouls = personalFouls;
+	}
+	public int getTechFouls() {
+		return techFouls;
+	}
+	public void setTechFouls(int techFouls) {
+		this.techFouls = techFouls;
+	}
+	
+	public int getAssist_turnover() {
+		return assist_turnover;
+	}
+	public void setAssist_turnover(int assist_turnover) {
+		this.assist_turnover = assist_turnover;
+	}
+	/*
+	
 	public double getSalary() {
 		return salary;
 	}
 	public void setSalary(double salary) {
 		this.salary = salary;
-	}
+	}*/
 	public int getgPlay() {
 		return gPlay;
 	}
@@ -70,12 +224,6 @@ abstract class player extends person{
 	}
 	public void setTeam(String team) {
 		this.team = team;
-	}
-	public boolean isHanded() {
-		return handed;
-	}
-	public void setHanded(boolean handed) {
-		this.handed = handed;
 	}
 	public int getNumber() {
 		return number;
@@ -125,12 +273,7 @@ abstract class player extends person{
 	public void setBlocks(int blocks) {
 		this.blocks = blocks;
 	}
-	public int getFouls() {
-		return fouls;
-	}
-	public void setFouls(int fouls) {
-		this.fouls = fouls;
-	}
+	
 	public int getTurnovers() {
 		return turnovers;
 	}
@@ -176,80 +319,41 @@ abstract class player extends person{
 	public double getPpg() {
 		return ppg;
 	}
-	public void setPpg(double ppg) {
-		this.ppg = ppg;
-	}
 	public double getRpg() {
 		return rpg;
-	}
-	public void setRpg(double rpg) {
-		this.rpg = rpg;
 	}
 	public double getoRpg() {
 		return oRpg;
 	}
-	public void setoRpg(double oRpg) {
-		this.oRpg = oRpg;
-	}
 	public double getdRpg() {
 		return dRpg;
-	}
-	public void setdRpg(double dRpg) {
-		this.dRpg = dRpg;
 	}
 	public double getApg() {
 		return apg;
 	}
-	public void setApg(double apg) {
-		this.apg = apg;
-	}
 	public double getSpg() {
 		return spg;
-	}
-	public void setSpg(double spg) {
-		this.spg = spg;
 	}
 	public double getBpg() {
 		return bpg;
 	}
-	public void setBpg(double bpg) {
-		this.bpg = bpg;
-	}
 	public double getFpg() {
 		return fpg;
-	}
-	public void setFpg(double fpg) {
-		this.fpg = fpg;
 	}
 	public double getTpg() {
 		return tpg;
 	}
-	public void setTpg(double tpg) {
-		this.tpg = tpg;
-	}
 	public double getMinPG() {
 		return minPG;
-	}
-	public void setMinPG(double minPG) {
-		this.minPG = minPG;
 	}
 	public double getFgPercent() {
 		return fgPercent;
 	}
-	public void setFgPercent(double fgPercent) {
-		this.fgPercent = fgPercent;
-	}
 	public double getFtPercent() {
 		return ftPercent;
 	}
-	public void setFtPercent(double ftPercent) {
-		this.ftPercent = ftPercent;
-	}
 	public double getThreeptPercent() {
 		return threeptPercent;
-	}
-	public void setThreeptPercent(double threeptPercent) {
-		this.threeptPercent = threeptPercent;
 	}
 	public double getRating() {
 		return rating;
@@ -257,6 +361,11 @@ abstract class player extends person{
 	public void setRating(double rating) {
 		this.rating = rating;
 	} //NBA player rating
-
+	public int getExperience() {
+		return experience;
+	}
+	public void setExperience(int experience) {
+		this.experience = experience;
+	}
 }
 
