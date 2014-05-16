@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+
 abstract class player extends person {
 	private String team; // team name
 	private int number; // Jersey
@@ -7,7 +9,6 @@ abstract class player extends person {
 	private int minutesPlayed; // total mins played season
 	private int points;// points
 	private int assists;// assists
-	private double assist_turnover;
 	private int offRebounds;// offensive rebounds
 	private int defRebounds;// defensive rebounds
 	private int steals;// steals
@@ -27,7 +28,7 @@ abstract class player extends person {
 	private int threeptMade; // 3ptrs made
 	private int threeptAttempt; // 3ptrs attempted
 	private int fouls;
-	
+
 	// efficieny ratings
 	private double ppg; // points per game
 	private double oRpg; // offensive rebounds per game
@@ -38,7 +39,7 @@ abstract class player extends person {
 	// check the blocks: should there be bpg or blockPercent
 	private double bpg; // blocks per game
 	private double blockPercent;
-	
+
 	private double fpg; // fouls per game
 	private double tpg; // turnovers per game
 	private double minPG; // minutes played per game
@@ -50,147 +51,14 @@ abstract class player extends person {
 	// player plus/minus excluded from this
 	private double rating;
 
-	public void printPlayer() {
-		System.out.println("Name: " + name);
-		System.out.println("Height: " + height);
-		System.out.println("Weight: " + weight);
-		System.out.println("Birthday: " + birthdate);
-		System.out.println("Birthplace: " + birthPlace);
-	}
-
-	public void printStats() {
-		System.out.println("Experience: " + experience);
-		System.out.println("Games Played: " + gPlay);
-		System.out.println("Games Started: " + gStart);
-		System.out.println("Total Minutes Played: " + minutesPlayed);
-		System.out.println("Team: " + team);
-		System.out.println("Jersey Number: " + number);
-		System.out.println("Points: " + points);
-		System.out.println("Assists: " + assists);
-
-		System.out.println("Assist/Turnover: " + assist_turnover);
-		System.out.println("Offensive Rebounds: " + offRebounds);
-		System.out.println("Defensive Rebounds: " + defRebounds);
-		System.out.println("Steals: " + steals);
-		System.out.println("Blocks Made: " + blocksMade);
-		System.out.println("Blocks Attempted: " + blockAttempt);
-		System.out.println("Fouls: " + fouls);
-		System.out.println("Turnovers: " + turnovers);
-		System.out.println("Field Goals Made: " + fgMade);
-		System.out.println("Field Goals Attempted: " + fgAttempt);
-		System.out.println("Free Throws Made: " + ftMade);
-		System.out.println("Free Throws Attempted: " + ftAttempt);
-		System.out.println("Three Points Made: " + threeptMade);
-		System.out.println("Three Points Attempted: " + threeptAttempt);
-		System.out.println("two Points Made: " + twoptMade);
-		System.out.println("two Points Attempted: " + twoptAttempt);
-
-		System.out.println("PPG: " + ppg);
-		System.out.println("APG: " + apg);
-		System.out.println("Offensive RPG: " + oRpg);
-		System.out.println("Defensive RPG: " + dRpg);
-		System.out.println("BPG: " + bpg);
-		System.out.println("FPG: " + fpg);
-		System.out.println("TPG: " + tpg);
-		System.out.println("Minutes Played Per Game: " + minPG);
-		System.out.println("FG Percentage: " + fgPercent);
-		System.out.println("FT Percentage: " + ftPercent);
-		System.out.println("3PT Percentage: " + threeptPercent);
-		System.out.println("2PT Percentage: " + twoptPercent);
-		System.out.println("Block Percentage: " + blockPercent);
-	}
-
-	public double round(double no, int precision) {
-		return (double) Math.round(no * (Math.pow(10, precision)))
-				/ (Math.pow(10, precision));
-	}
-
-	public void calculateEfficiency() {
-		{
-			fouls = flagrantFouls + personalFouls + techFouls;
-			// efficiency ratings
-
-			if (gPlay != 0) {
-				minPG = round((double) minutesPlayed / gPlay, 2); // minutes
-																	// played
-																	// per game
-				ppg = round((double) points / gPlay * 100, 2); // point int per
-																// game
-				oRpg = round((double) offRebounds / gPlay * 100, 2); // offensive
-																		// rebounds
-																		// per
-																		// game
-				dRpg = round((double) defRebounds / gPlay * 100, 2); // defensive
-																		// rebounds
-																		// per
-																		// game
-				apg = round((double) assists / gPlay * 100, 2); // assists per
-																// game
-				spg = round((double) steals / gPlay * 100, 2); // steals per
-																// game//all
-																// fouls added
-				fpg = round((double) fouls / gPlay * 100, 2);// fouls per game
-				tpg = round((double) turnovers / gPlay * 100, 2);// turnovers
-																	// per game
-			}
-
-			if (gPlay != 0) {
-				// check the blocks: should there be bpg or blockPercent
-				bpg = round((double) blocksMade / gPlay * 100, 2); // blocks per
-																	// game
-			}
-
-			if (blockAttempt != 0) {
-				blockPercent = round((double) blocksMade / blockAttempt * 100,
-						2);
-			} else {
-				blockPercent = 0;
-			}
-
-			if (fgAttempt != 0) {
-				fgPercent = round((double) fgMade / fgAttempt * 100, 2); // field
-																			// goal
-																			// percentage
-			} else {
-				fgPercent = 0;
-			}
-			if (ftAttempt != 0) {
-				ftPercent = round((double) ftMade / ftAttempt * 100, 2); // free
-																			// throw
-																			// percentage
-			} else {
-				ftPercent = 0;
-			}
-			if (threeptAttempt != 0) {
-				threeptPercent = round((double) threeptMade / threeptAttempt
-						* 100, 2); // 3 point percentage
-			} else {
-				threeptPercent = 0;
-			}
-			if (twoptAttempt != 0) {
-				twoptPercent = round((double) twoptMade / twoptAttempt * 100, 2);// 3
-																					// point
-																					// percentage
-			} else {
-				twoptPercent = 0;
-			}
-
-		}
-	}
-
-	public player() {
-
-	}
-
-	
-public int getExperience() {
+	public int getExperience() {
 		return experience;
 	}
 
 	public void setExperience(int experience) {
 		this.experience = experience;
 	}
-	
+
 	public int getFlagrantFouls() {
 		return flagrantFouls;
 	}
@@ -225,14 +93,6 @@ public int getExperience() {
 
 	public void setTechFouls(int techFouls) {
 		this.techFouls = techFouls;
-	}
-
-	public double getAssist_turnover() {
-		return assist_turnover;
-	}
-
-	public void setAssist_turnover(double assist_turnover) {
-		this.assist_turnover = assist_turnover;
 	}
 
 	public int getgPlay() {
@@ -450,4 +310,167 @@ public int getExperience() {
 	public void setTwoptAttempt(int twoptAttempt) {
 		this.twoptAttempt = twoptAttempt;
 	}
+
+	public player() {
+
+	}
+
+	public void printPlayer() {
+		System.out.println("Name: " + name);
+		System.out.println("Height: " + height);
+		System.out.println("Weight: " + weight);
+		System.out.println("Birthday: " + birthdate);
+		System.out.println("Birthplace: " + birthPlace);
+	}
+
+	public void printStats() {
+		System.out.println("Experience: " + experience);
+		System.out.println("Games Played: " + gPlay);
+		System.out.println("Games Started: " + gStart);
+		System.out.println("Total Minutes Played: " + minutesPlayed);
+		System.out.println("Team: " + team);
+		System.out.println("Jersey Number: " + number);
+		System.out.println("Points: " + points);
+		System.out.println("Assists: " + assists);
+
+		System.out.println("Offensive Rebounds: " + offRebounds);
+		System.out.println("Defensive Rebounds: " + defRebounds);
+		System.out.println("Steals: " + steals);
+		System.out.println("Blocks Made: " + blocksMade);
+		System.out.println("Blocks Attempted: " + blockAttempt);
+		System.out.println("Fouls: " + fouls);
+		System.out.println("Turnovers: " + turnovers);
+		System.out.println("Field Goals Made: " + fgMade);
+		System.out.println("Field Goals Attempted: " + fgAttempt);
+		System.out.println("Free Throws Made: " + ftMade);
+		System.out.println("Free Throws Attempted: " + ftAttempt);
+		System.out.println("Three Points Made: " + threeptMade);
+		System.out.println("Three Points Attempted: " + threeptAttempt);
+		System.out.println("two Points Made: " + twoptMade);
+		System.out.println("two Points Attempted: " + twoptAttempt);
+
+		System.out.println("PPG: " + ppg);
+		System.out.println("APG: " + apg);
+		System.out.println("Offensive RPG: " + oRpg);
+		System.out.println("Defensive RPG: " + dRpg);
+		System.out.println("BPG: " + bpg);
+		System.out.println("FPG: " + fpg);
+		System.out.println("TPG: " + tpg);
+		System.out.println("Minutes Played Per Game: " + minPG);
+		System.out.println("FG Percentage: " + fgPercent);
+		System.out.println("FT Percentage: " + ftPercent);
+		System.out.println("3PT Percentage: " + threeptPercent);
+		System.out.println("2PT Percentage: " + twoptPercent);
+		System.out.println("Block Percentage: " + blockPercent);
+	}
+
+	public double round(double no, int precision) {
+		return (double) Math.round(no * (Math.pow(10, precision)))
+				/ (Math.pow(10, precision));
+	}
+
+	public void calculateEfficiency() {
+		
+			fouls = flagrantFouls + personalFouls + techFouls;
+			// efficiency ratings
+
+			if (gPlay != 0) {
+				minPG = round((double) minutesPlayed / gPlay, 2); // minutes
+																	// played
+																	// per game
+				ppg = round((double) points / gPlay * 100, 2); // point int per
+																// game
+				oRpg = round((double) offRebounds / gPlay * 100, 2); // offensive
+																		// rebounds
+																		// per
+																		// game
+				dRpg = round((double) defRebounds / gPlay * 100, 2); // defensive
+																		// rebounds
+																		// per
+																		// game
+				apg = round((double) assists / gPlay * 100, 2); // assists per
+																// game
+				spg = round((double) steals / gPlay * 100, 2); // steals per
+																// game//all
+																// fouls added
+				fpg = round((double) fouls / gPlay * 100, 2);// fouls per game
+				tpg = round((double) turnovers / gPlay * 100, 2);// turnovers
+																	// per game
+			}
+
+			if (gPlay != 0) {
+				// check the blocks: should there be bpg or blockPercent
+				bpg = round((double) blocksMade / gPlay * 100, 2); // blocks per
+																	// game
+			}
+
+			if (blockAttempt != 0) {
+				blockPercent = round((double) blocksMade / blockAttempt * 100,
+						2);
+			} else {
+				blockPercent = 0;
+			}
+
+			if (fgAttempt != 0) {
+				fgPercent = round((double) fgMade / fgAttempt * 100, 2); // field
+																			// goal
+																			// percentage
+			} else {
+				fgPercent = 0;
+			}
+			if (ftAttempt != 0) {
+				ftPercent = round((double) ftMade / ftAttempt * 100, 2); // free
+																			// throw
+																			// percentage
+			} else {
+				ftPercent = 0;
+			}
+			if (threeptAttempt != 0) {
+				threeptPercent = round((double) threeptMade / threeptAttempt
+						* 100, 2); // 3 point percentage
+			} else {
+				threeptPercent = 0;
+			}
+			if (twoptAttempt != 0) {
+				twoptPercent = round((double) twoptMade / twoptAttempt * 100, 2);// 3
+																					// point
+																					// percentage
+			} else {
+				twoptPercent = 0;
+			}
+
+		
+	}
+	
+	public ArrayList<String> getPersonalStats(){
+		 ArrayList<String> personalStats = new ArrayList<String>();
+		personalStats.add(name);		personalStats.add(String.valueOf(height));		personalStats.add(String.valueOf(weight));
+		personalStats.add(birthdate);		personalStats.add(String.valueOf(birthPlace));	
+
+	return (personalStats);}
+	
+	public ArrayList<Double> getOffensiveStats(){
+		
+		//Remember the negative in front of tpg
+		
+		System.out.println("PPG: " + ppg);
+		System.out.println("APG: " + apg);
+		System.out.println("Offensive RPG: " + oRpg);
+		System.out.println("Defensive RPG: " + dRpg);
+		System.out.println("BPG: " + bpg);
+		System.out.println("FPG: " + fpg);
+		System.out.println("TPG: " + tpg);
+		System.out.println("Minutes Played Per Game: " + minPG);
+		System.out.println("FG Percentage: " + fgPercent);
+		System.out.println("FT Percentage: " + ftPercent);
+		System.out.println("3PT Percentage: " + threeptPercent);
+		System.out.println("2PT Percentage: " + twoptPercent);
+		System.out.println("Block Percentage: " + blockPercent);
+		
+		
+		 ArrayList<Double> offensiveStats = new ArrayList<Double>();
+	offensiveStats.add(ppg);
+	offensiveStats.add(apg);offensiveStats.add(oRpg);offensiveStats.add(-tpg);
+	offensiveStats.add(minPG);
+	return (offensiveStats);}
 }
