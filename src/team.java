@@ -6,6 +6,8 @@ public class team {
 	static ArrayList<String> StatsNameList = new ArrayList<String>();
 	static ArrayList<String> StatsValueList = new ArrayList<String>();
 
+	static player[] p_team1_playing5 = new player[5];
+	
 	public static void main(String[] args) {
 		boolean error = false;
 		int sleepTime = 1000;
@@ -33,12 +35,23 @@ public class team {
 		shootingGuard p_team2_10 = new shootingGuard();
 
 		ArrayList<String> p_team1_1_per = new ArrayList<String>();
-		ArrayList<String> p_team1_1_off = new ArrayList<String>();
-		ArrayList<String> p_team1_1_def = new ArrayList<String>();
-				
+		ArrayList<Double> p_team1_1_off = new ArrayList<Double>();
+		ArrayList<Double> p_team1_1_def = new ArrayList<Double>();
+		
+
+		p_team1_playing5[0] = p_team1_1;
+		p_team1_playing5[1] = p_team1_2;
+		p_team1_playing5[2] = p_team1_3;
+		p_team1_playing5[3] = p_team1_4;
+		p_team1_playing5[4] = p_team1_5;
+		
 		//increasing offence of other team same as decreasing defence of our team
 		//fouls should be -defence
 		//turnovers should be -offense
+		
+		//needs to be a modified stats arrayList
+		//individual offensive/defensive rating will be for 1 min 
+		//should only be 5 players each team to calculate stats for
 		
 		if (!error) {
 			playerStatParser sp_team1_1 = new playerStatParser("Miami Heat",
@@ -50,9 +63,16 @@ public class team {
 				error = true;
 			} else {
 				setPlayerStats(p_team1_1);
-				p_team1_1_per = p_team1_1.getOffensiveStats();
+				p_team1_1.calculateEfficiency();
+				//p_team1_1_per = p_team1_1.getPersonalStats();
+		
+			//	p_team1_1_def= p_team1_1.getDefensiveStats();
 			}
 		}
+		
+		double oRating  = calOffRating();
+		System.out.println("off: "+oRating);
+		System.out.println("def: "+calDefRating());
 
 		try {
 			Thread.sleep(sleepTime);
@@ -507,6 +527,53 @@ public class team {
 		System.out.println("-----------------------End");
 	}
 
+	private static double calOffRating() {
+		double p1_offensive = calIndiviOffRating(p_team1_playing5[0])/p_team1_playing5[0].getMinPG();
+		//double p2_offensive = calIndiviOffRating(p_team1_playing5[1])/p_team1_playing5[1].getMinPG();
+		//double p3_offensive = calIndiviOffRating(p_team1_playing5[2])/p_team1_playing5[2].getMinPG();
+	//	double p4_offensive = calIndiviOffRating(p_team1_playing5[3])/p_team1_playing5[3].getMinPG();
+//		double p5_offensive = calIndiviOffRating(p_team1_playing5[4])/p_team1_playing5[4].getMinPG();
+		
+		
+		
+		return p1_offensive;
+	}
+	private static double calDefRating(){
+		double p1_defensive = calIndiviDefRating(p_team1_playing5[0])/p_team1_playing5[0].getMinPG();
+		//	double p2_defensive = calIndiviDefRating(p_team1_playing5[1])/p_team1_playing5[1].getMinPG();
+//			double p3_defensive = calIndiviDefRating(p_team1_playing5[2])/p_team1_playing5[2].getMinPG();
+			//double p4_defensive = calIndiviDefRating(p_team1_playing5[3])/p_team1_playing5[3].getMinPG();
+		//	double p5_defensive = calIndiviDefRating(p_team1_playing5[4])/p_team1_playing5[4].getMinPG();
+		return p1_defensive;
+			
+	}
+	private static double calIndiviOffRating(player p){
+	double rating=(
+		p.getPpg()
+	+	p.getApg()+p.getoRpg()
+		-p.getTurnovers()
+	+	p.getFgPercent()
+	+	p.getFtPercent()
+	+	p.getThreeptPercent()
+	+	p.getTwoptPercent())/8;
+
+	
+	System.out.println(rating);
+	
+
+		return rating;
+		
+	}
+
+	private static double calIndiviDefRating(player p){
+		double rating=(p.getdRpg()
+	+	p.getBpg()
+	-p.getFpg()
+	+p.getBlockPercent())/4;
+			return rating;
+			
+		}
+	
 	private static void setPlayerStats(player p) {
 		ArrayList<Integer> refToKeep = new ArrayList<Integer>();
 
@@ -664,12 +731,11 @@ public class team {
 				}
 			}
 
-		}
+		}System.out.println("c:"+p.getAssists());
 		// Clean up stats list
 		//reveresed so changing indices do not effect next removal
 		Collections.sort(refToKeep, Collections.reverseOrder());
 
-		System.out.println(refToKeep.toString());
 			for (int j = StatsNameList.size()-1; j > 0; j--) {
 				if (refToKeep.contains(j)){
 					

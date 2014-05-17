@@ -46,7 +46,11 @@ abstract class player extends person {
 	private double fgPercent; // field goal percentage
 	private double ftPercent; // free throw percentage
 	private double threeptPercent; // 3 point percentage
-	private double twoptPercent; // 3 point percentage
+	private double twoptPercent; // 2 point percentage
+
+	public double getTwoptPercent() {
+		return twoptPercent;
+	}
 
 	// player plus/minus excluded from this
 	private double rating;
