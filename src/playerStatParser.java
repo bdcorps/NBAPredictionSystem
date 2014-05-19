@@ -21,14 +21,14 @@ import org.xml.sax.helpers.XMLReaderFactory;
  * Player's stat names and values are stored in two arraylists   
  * 
  * Part Of: NBA Prediction System
- * @author Tavneet Uppal, Vasu Kamra, Mankirt, Sukhpal S. Saini
+ * @author Vasu Kamra, Mankirt, Tavneet Uppal, Sukhpal S. Saini
  * Last Modified: 10-05-2014 at 2:20 PM
  */
 
 public class playerStatParser {
-	String api1 = "8udezbnqaugun5degyjt2x8g";
+	String api1 = "u7nqmxhtfgffubyuq28aypbf";
 	String api2 = "8ntxr2s4bxk8wpf6wtetstnc";
-	String api3 = "u7nqmxhtfgffubyuq28aypbf";
+	String api3 = "8udezbnqaugun5degyjt2x8g";
 	int teamNodeCounter = 0;
 	String teamName = "";
 	String teamID = "";
@@ -77,7 +77,7 @@ public class playerStatParser {
 				}
 
 			} catch (Exception e) {
-				System.out.println("Error: " + e.getMessage());
+				System.out.println("Error Checkpoint 1: " + e.getMessage());
 				error = true;
 			}
 		}
@@ -102,7 +102,7 @@ public class playerStatParser {
 					}
 
 				} catch (Exception e) {
-					System.out.println("Error: " + e.getMessage());
+					System.out.println("Error Checkpoint 2: " + e.getMessage());
 					error = true;
 				}
 			}
@@ -125,7 +125,7 @@ public class playerStatParser {
 						}
 
 					} catch (Exception e) {
-						System.out.println("Error: " + e.getMessage());
+						System.out.println("Error Checkpoint 3: " + e.getMessage());
 						error = true;
 					}
 				}

@@ -3,59 +3,59 @@ import java.util.Collections;
 
 public class team {
 
-	static ArrayList<String> StatsNameList = new ArrayList<String>();
-	static ArrayList<String> StatsValueList = new ArrayList<String>();
+	ArrayList<String> StatsNameList = new ArrayList<String>();
+	ArrayList<String> StatsValueList = new ArrayList<String>();
 
-	static player[] p_team1_playing5 = new player[5];
+	player[] p_team1_playing5 = new player[5];
+
+	boolean error = false;
+
+	center p_team1_1 = new center();
+	smallForward p_team1_2 = new smallForward();
+	powerForward p_team1_3 = new powerForward();
+	pointGuard p_team1_4 = new pointGuard();
+	shootingGuard p_team1_5 = new shootingGuard();
+	center p_team1_6 = new center();
+	smallForward p_team1_7 = new smallForward();
+	powerForward p_team1_8 = new powerForward();
+	pointGuard p_team1_9 = new pointGuard();
+	shootingGuard p_team1_10 = new shootingGuard();
+
+	ArrayList<String> p_team1_1_per = new ArrayList<String>();
+	ArrayList<Double> p_team1_1_off = new ArrayList<Double>();
+	ArrayList<Double> p_team1_1_def = new ArrayList<Double>();
+
+	playerStatParser sp_team1_1;
+	playerStatParser sp_team1_2;
+	playerStatParser sp_team1_3;
+	playerStatParser sp_team1_4;
+	playerStatParser sp_team1_5;
 	
-	public static void main(String[] args) {
-		boolean error = false;
-		int sleepTime = 1000;
-
-		center p_team1_1 = new center();
-		smallForward p_team1_2 = new smallForward();
-		powerForward p_team1_3 = new powerForward();
-		pointGuard p_team1_4 = new pointGuard();
-		shootingGuard p_team1_5 = new shootingGuard();
-		center p_team1_6 = new center();
-		smallForward p_team1_7 = new smallForward();
-		powerForward p_team1_8 = new powerForward();
-		pointGuard p_team1_9 = new pointGuard();
-		shootingGuard p_team1_10 = new shootingGuard();
-
-		center p_team2_1 = new center();
-		smallForward p_team2_2 = new smallForward();
-		powerForward p_team2_3 = new powerForward();
-		pointGuard p_team2_4 = new pointGuard();
-		shootingGuard p_team2_5 = new shootingGuard();
-		center p_team2_6 = new center();
-		smallForward p_team2_7 = new smallForward();
-		powerForward p_team2_8 = new powerForward();
-		pointGuard p_team2_9 = new pointGuard();
-		shootingGuard p_team2_10 = new shootingGuard();
-
-		ArrayList<String> p_team1_1_per = new ArrayList<String>();
-		ArrayList<Double> p_team1_1_off = new ArrayList<Double>();
-		ArrayList<Double> p_team1_1_def = new ArrayList<Double>();
+	public team(ArrayList<playerStatParser> playerParsers) {
+	
+		sp_team1_1 = playerParsers.get(0);
+		sp_team1_2 = playerParsers.get(1);
+		sp_team1_3 = playerParsers.get(2);
+		sp_team1_4 = playerParsers.get(3);
+		sp_team1_5 = playerParsers.get(4);
 		
-
+		
 		p_team1_playing5[0] = p_team1_1;
 		p_team1_playing5[1] = p_team1_2;
 		p_team1_playing5[2] = p_team1_3;
 		p_team1_playing5[3] = p_team1_4;
 		p_team1_playing5[4] = p_team1_5;
-		
-		//increasing offence of other team same as decreasing defence of our team
-		//fouls should be -defence
-		//turnovers should be -offense
-		
-		//needs to be a modified stats arrayList
-		//individual offensive/defensive rating will be for 1 min 
-		//should only be 5 players each team to calculate stats for
-		
+
+		// increasing offence of other team same as decreasing defence of our
+		// team
+		// fouls should be -defence
+		// turnovers should be -offense
+
+		// needs to be a modified stats arrayList
+		// individual offensive/defensive rating will be for 1 min
+		// should only be 5 players each team to calculate stats for
+
 		if (!error) {
-			playerStatParser sp_team1_1 = new playerStatParser("Miami Heat",
-					"LeBron James");
 			StatsNameList = sp_team1_1.getplayerStatNameList();
 			StatsValueList = sp_team1_1.getplayerStatValueList();
 
@@ -63,518 +63,222 @@ public class team {
 				error = true;
 			} else {
 				setPlayerStats(p_team1_1);
-				p_team1_1.calculateEfficiency();
-				//p_team1_1_per = p_team1_1.getPersonalStats();
+				// p_team1_1.calculateEfficiency();
+				// p_team1_1_per = p_team1_1.getPersonalStats();
+
+				// p_team1_1_def= p_team1_1.getDefensiveStats();
+			}
+		}
+
 		
-			//	p_team1_1_def= p_team1_1.getDefensiveStats();
+		if (!error) {
+			StatsNameList = sp_team1_2.getplayerStatNameList();
+			StatsValueList = sp_team1_2.getplayerStatValueList();
+
+			if (StatsNameList == null || StatsValueList == null) {
+				error = true;
+			} else {
+				setPlayerStats(p_team1_2);
 			}
 		}
 		
-		double oRating  = calOffRating();
-		System.out.println("off: "+oRating);
-		System.out.println("def: "+calDefRating());
 
-		try {
-			Thread.sleep(sleepTime);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+		if (!error) {
+			StatsNameList = sp_team1_3.getplayerStatNameList();
+			StatsValueList = sp_team1_3.getplayerStatValueList();
+
+			if (StatsNameList == null || StatsValueList == null) {
+				error = true;
+			} else {
+				setPlayerStats(p_team1_3);
+			}
 		}
-		/*
-				if (!error) {
-					playerStatParser sp_team1_2 = new playerStatParser("Miami Heat",
-							"Dwyane Wade");
-					StatsNameList = sp_team1_2.getplayerStatNameList();
-					StatsValueList = sp_team1_2.getplayerStatValueList();
+		
 
-					if (StatsNameList == null || StatsValueList == null) {
-						error = true;
-					} else {
-						setPlayerStats(p_team1_2);
-					}
+		if (!error) {
+			StatsNameList = sp_team1_4.getplayerStatNameList();
+			StatsValueList = sp_team1_4.getplayerStatValueList();
+
+			if (StatsNameList == null || StatsValueList == null) {
+				error = true;
+			} else {
+				setPlayerStats(p_team1_4);
+			}
+		}
+		
+
+		if (!error) {
+			StatsNameList = sp_team1_5.getplayerStatNameList();
+			StatsValueList = sp_team1_5.getplayerStatValueList();
+
+			if (StatsNameList == null || StatsValueList == null) {
+				error = true;
+			} else {
+				setPlayerStats(p_team1_5);
+			}
+		}
+	
+
+		/*	if (!error) {
+				playerStatParser sp_team1_6 = new playerStatParser("Miami Heat",
+						"Ray Allen");
+				StatsNameList = sp_team1_6.getplayerStatNameList();
+				StatsValueList = sp_team1_6.getplayerStatValueList();
+
+				if (StatsNameList == null || StatsValueList == null) {
+					error = true;
+				} else {
+					setPlayerStats(p_team1_6);
 				}
-				try {
-					Thread.sleep(sleepTime);
-				} catch (InterruptedException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
+			}
+			
+
+			if (!error) {
+				playerStatParser sp_team1_7 = new playerStatParser("Miami Heat",
+						"Mario Chalmers");
+				StatsNameList = sp_team1_7.getplayerStatNameList();
+				StatsValueList = sp_team1_7.getplayerStatValueList();
+				if (StatsNameList == null || StatsValueList == null) {
+					error = true;
+				} else {
+					setPlayerStats(p_team1_7);
 				}
+			}
+			
+			if (!error) {
+				playerStatParser sp_team1_8 = new playerStatParser("Miami Heat",
+						"Norris Cole");
+				StatsNameList = sp_team1_8.getplayerStatNameList();
+				StatsValueList = sp_team1_8.getplayerStatValueList();
 
-				if (!error) {
-					playerStatParser sp_team1_3 = new playerStatParser("Miami Heat",
-							"Chris Bosh");
-					StatsNameList = sp_team1_3.getplayerStatNameList();
-					StatsValueList = sp_team1_3.getplayerStatValueList();
-
-					if (StatsNameList == null || StatsValueList == null) {
-						error = true;
-					} else {
-						setPlayerStats(p_team1_3);
-					}
+				if (StatsNameList == null || StatsValueList == null) {
+					error = true;
+				} else {
+					setPlayerStats(p_team1_8);
 				}
-				try {
-					Thread.sleep(sleepTime);
-				} catch (InterruptedException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
+			}
+		
+			if (!error) {
+				playerStatParser sp_team1_9 = new playerStatParser("Miami Heat",
+						"Shane Battier");
+				StatsNameList = sp_team1_9.getplayerStatNameList();
+				StatsValueList = sp_team1_9.getplayerStatValueList();
+
+				if (StatsNameList == null || StatsValueList == null) {
+					error = true;
+				} else {
+					setPlayerStats(p_team1_9);
 				}
+			}
+			
+			if (!error) {
+				playerStatParser sp_team1_10 = new playerStatParser("Miami Heat",
+						"James Jones");
+				StatsNameList = sp_team1_10.getplayerStatNameList();
+				StatsValueList = sp_team1_10.getplayerStatValueList();
 
-				if (!error) {
-					playerStatParser sp_team1_4 = new playerStatParser("Miami Heat",
-							"Greg Oden");
-					StatsNameList = sp_team1_4.getplayerStatNameList();
-					StatsValueList = sp_team1_4.getplayerStatValueList();
-
-					if (StatsNameList == null || StatsValueList == null) {
-						error = true;
-					} else {
-						setPlayerStats(p_team1_4);
-					}
+				if (StatsNameList == null || StatsValueList == null) {
+					error = true;
+				} else {
+					setPlayerStats(p_team1_10);
 				}
-				try {
-					Thread.sleep(sleepTime);
-				} catch (InterruptedException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
+			}
+			*/
 
-				if (!error) {
-					playerStatParser sp_team1_5 = new playerStatParser("Miami Heat",
-							"Chris Andersen");
-					StatsNameList = sp_team1_5.getplayerStatNameList();
-					StatsValueList = sp_team1_5.getplayerStatValueList();
+		if (!error) {
+			p_team1_1.calculateEfficiency();
+			// p_team1_1.printPlayer();
+			// p_team1_1.printStats();
 
-					if (StatsNameList == null || StatsValueList == null) {
-						error = true;
-					} else {
-						setPlayerStats(p_team1_5);
-					}
-				}
-				try {
-					Thread.sleep(sleepTime);
-				} catch (InterruptedException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
+			p_team1_2.calculateEfficiency();
+			// p_team1_2.printPlayer();
+			// p_team1_2.printStats();
 
-				if (!error) {
-					playerStatParser sp_team1_6 = new playerStatParser("Miami Heat",
-							"Ray Allen");
-					StatsNameList = sp_team1_6.getplayerStatNameList();
-					StatsValueList = sp_team1_6.getplayerStatValueList();
+			p_team1_3.calculateEfficiency();
+			// p_team1_3.printPlayer();
+			// p_team1_3.printStats();
 
-					if (StatsNameList == null || StatsValueList == null) {
-						error = true;
-					} else {
-						setPlayerStats(p_team1_6);
-					}
-				}
-				try {
-					Thread.sleep(sleepTime);
-				} catch (InterruptedException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
+			p_team1_4.calculateEfficiency();
+			// p_team1_4.printPlayer();
+			// p_team1_4.printStats();
 
-				if (!error) {
-					playerStatParser sp_team1_7 = new playerStatParser("Miami Heat",
-							"Mario Chalmers");
-					StatsNameList = sp_team1_7.getplayerStatNameList();
-					StatsValueList = sp_team1_7.getplayerStatValueList();
-					if (StatsNameList == null || StatsValueList == null) {
-						error = true;
-					} else {
-						setPlayerStats(p_team1_7);
-					}
-				}
-				try {
-					Thread.sleep(sleepTime);
-				} catch (InterruptedException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
+			p_team1_5.calculateEfficiency();
+			// p_team1_5.printPlayer();
+			// p_team1_5.printStats();
 
-				if (!error) {
-					playerStatParser sp_team1_8 = new playerStatParser("Miami Heat",
-							"Norris Cole");
-					StatsNameList = sp_team1_8.getplayerStatNameList();
-					StatsValueList = sp_team1_8.getplayerStatValueList();
+			System.out.println("off: " + calOffRating());
+			System.out.println("def: " + calDefRating());
 
-					if (StatsNameList == null || StatsValueList == null) {
-						error = true;
-					} else {
-						setPlayerStats(p_team1_8);
-					}
-				}
-				try {
-					Thread.sleep(sleepTime);
-				} catch (InterruptedException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
+			/*	p_team1_6.calculateEfficiency();
+				p_team1_6.printPlayer();
+				p_team1_6.printStats();
 
-				if (!error) {
-					playerStatParser sp_team1_9 = new playerStatParser("Miami Heat",
-							"Shane Battier");
-					StatsNameList = sp_team1_9.getplayerStatNameList();
-					StatsValueList = sp_team1_9.getplayerStatValueList();
+				p_team1_7.calculateEfficiency();
+				p_team1_7.printPlayer();
+				p_team1_7.printStats();
 
-					if (StatsNameList == null || StatsValueList == null) {
-						error = true;
-					} else {
-						setPlayerStats(p_team1_9);
-					}
-				}
-				try {
-					Thread.sleep(sleepTime);
-				} catch (InterruptedException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-				if (!error) {
-					playerStatParser sp_team1_10 = new playerStatParser("Miami Heat",
-							"James Jones");
-					StatsNameList = sp_team1_10.getplayerStatNameList();
-					StatsValueList = sp_team1_10.getplayerStatValueList();
+				p_team1_8.calculateEfficiency();
+				p_team1_8.printPlayer();
+				p_team1_8.printStats();
 
-					if (StatsNameList == null || StatsValueList == null) {
-						error = true;
-					} else {
-						setPlayerStats(p_team1_10);
-					}
-				}
-				try {
-					Thread.sleep(sleepTime);
-				} catch (InterruptedException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
+				p_team1_9.calculateEfficiency();
+				p_team1_9.printPlayer();
+				p_team1_9.printStats();
 
-				if (!error) {
-					playerStatParser sp_team2_1 = new playerStatParser("Brooklyn Nets",
-							"Deron Williams");
-					StatsNameList = sp_team2_1.getplayerStatNameList();
-					StatsValueList = sp_team2_1.getplayerStatValueList();
-
-					if (StatsNameList == null || StatsValueList == null) {
-						error = true;
-					} else {
-						setPlayerStats(p_team2_1);
-					}
-				}
-
-				try {
-					Thread.sleep(sleepTime);
-				} catch (InterruptedException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-
-				if (!error) {
-					playerStatParser sp_team2_2 = new playerStatParser("Brooklyn Nets",
-							"Kevin Garnett");
-					StatsNameList = sp_team2_2.getplayerStatNameList();
-					StatsValueList = sp_team2_2.getplayerStatValueList();
-
-					if (StatsNameList == null || StatsValueList == null) {
-						error = true;
-					} else {
-						setPlayerStats(p_team2_2);
-					}
-				}
-				try {
-					Thread.sleep(sleepTime);
-				} catch (InterruptedException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-
-				if (!error) {
-					playerStatParser sp_team2_3 = new playerStatParser("Brooklyn Nets",
-							"Paul Pierce");
-					StatsNameList = sp_team2_3.getplayerStatNameList();
-					StatsValueList = sp_team2_3.getplayerStatValueList();
-
-					if (StatsNameList == null || StatsValueList == null) {
-						error = true;
-					} else {
-						setPlayerStats(p_team2_3);
-					}
-				}
-				try {
-					Thread.sleep(sleepTime);
-				} catch (InterruptedException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-
-				if (!error) {
-					playerStatParser sp_team2_4 = new playerStatParser("Brooklyn Nets",
-							"Jason Collins");
-					StatsNameList = sp_team2_4.getplayerStatNameList();
-					StatsValueList = sp_team2_4.getplayerStatValueList();
-
-					if (StatsNameList == null || StatsValueList == null) {
-						error = true;
-					} else {
-						setPlayerStats(p_team2_4);
-					}
-				}
-				try {
-					Thread.sleep(sleepTime);
-				} catch (InterruptedException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-
-				if (!error) {
-					playerStatParser sp_team2_5 = new playerStatParser("Brooklyn Nets",
-							"Joe Johnson");
-					StatsNameList = sp_team2_5.getplayerStatNameList();
-					StatsValueList = sp_team2_5.getplayerStatValueList();
-
-					if (StatsNameList == null || StatsValueList == null) {
-						error = true;
-					} else {
-						setPlayerStats(p_team2_5);
-					}
-				}
-				try {
-					Thread.sleep(sleepTime);
-				} catch (InterruptedException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-
-				if (!error) {
-					playerStatParser sp_team2_6 = new playerStatParser("Brooklyn Nets",
-							"Brook Lopez");
-					StatsNameList = sp_team2_6.getplayerStatNameList();
-					StatsValueList = sp_team2_6.getplayerStatValueList();
-
-					if (StatsNameList == null || StatsValueList == null) {
-						error = true;
-					} else {
-						setPlayerStats(p_team2_6);
-					}
-				}
-				try {
-					Thread.sleep(sleepTime);
-				} catch (InterruptedException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-
-				if (!error) {
-					playerStatParser sp_team2_7 = new playerStatParser("Brooklyn Nets",
-							"Mason Plumlee");
-					StatsNameList = sp_team2_7.getplayerStatNameList();
-					StatsValueList = sp_team2_7.getplayerStatValueList();
-					if (StatsNameList == null || StatsValueList == null) {
-						error = true;
-					} else {
-						setPlayerStats(p_team2_7);
-					}
-				}
-				try {
-					Thread.sleep(sleepTime);
-				} catch (InterruptedException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-
-				if (!error) {
-					playerStatParser sp_team2_8 = new playerStatParser("Brooklyn Nets",
-							"Shaun Livingston");
-					StatsNameList = sp_team2_8.getplayerStatNameList();
-					StatsValueList = sp_team2_8.getplayerStatValueList();
-
-					if (StatsNameList == null || StatsValueList == null) {
-						error = true;
-					} else {
-						setPlayerStats(p_team2_8);
-					}
-				}
-				try {
-					Thread.sleep(sleepTime);
-				} catch (InterruptedException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-
-				if (!error) {
-					playerStatParser sp_team2_9 = new playerStatParser("Brooklyn Nets",
-							"Jorge Gutierrez");
-					StatsNameList = sp_team2_9.getplayerStatNameList();
-					StatsValueList = sp_team2_9.getplayerStatValueList();
-
-					if (StatsNameList == null || StatsValueList == null) {
-						error = true;
-					} else {
-						setPlayerStats(p_team2_9);
-					}
-				}
-				try {
-					Thread.sleep(sleepTime);
-				} catch (InterruptedException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-				if (!error) {
-					playerStatParser sp_team2_10 = new playerStatParser("Brooklyn Nets",
-							"Andrei Kirilenko");
-					StatsNameList = sp_team2_10.getplayerStatNameList();
-					StatsValueList = sp_team2_10.getplayerStatValueList();
-
-					if (StatsNameList == null || StatsValueList == null) {
-						error = true;
-					} else {
-						setPlayerStats(p_team2_10);
-					}
-				}
-				try {
-					Thread.sleep(sleepTime);
-				} catch (InterruptedException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-
-				if (!error) {
-					System.out.println("\nTeam 1\n");
-					p_team1_1.calculateEfficiency();
-					p_team1_1.printPlayer();
-					p_team1_1.printStats();
-
-					p_team1_2.calculateEfficiency();
-					p_team1_2.printPlayer();
-					p_team1_2.printStats();
-
-					p_team1_3.calculateEfficiency();
-					p_team1_3.printPlayer();
-					p_team1_3.printStats();
-
-					p_team1_4.calculateEfficiency();
-					p_team1_4.printPlayer();
-					p_team1_4.printStats();
-
-					p_team1_5.calculateEfficiency();
-					p_team1_5.printPlayer();
-					p_team1_5.printStats();
-
-					p_team1_6.calculateEfficiency();
-					p_team1_6.printPlayer();
-					p_team1_6.printStats();
-
-					p_team1_7.calculateEfficiency();
-					p_team1_7.printPlayer();
-					p_team1_7.printStats();
-
-					p_team1_8.calculateEfficiency();
-					p_team1_8.printPlayer();
-					p_team1_8.printStats();
-
-					p_team1_9.calculateEfficiency();
-					p_team1_9.printPlayer();
-					p_team1_9.printStats();
-
-					p_team1_10.calculateEfficiency();
-					p_team1_10.printPlayer();
-					p_team1_10.printStats();
-
-					System.out.println("\nTeam 2\n");
-					
-					p_team2_1.calculateEfficiency();
-					p_team2_1.printPlayer();
-					p_team2_1.printStats();
-
-					p_team2_2.calculateEfficiency();
-					p_team2_2.printPlayer();
-					p_team2_2.printStats();
-
-					p_team2_3.calculateEfficiency();
-					p_team2_3.printPlayer();
-					p_team2_3.printStats();
-
-					p_team2_4.calculateEfficiency();
-					p_team2_4.printPlayer();
-					p_team2_4.printStats();
-
-					p_team2_5.calculateEfficiency();
-					p_team2_5.printPlayer();
-					p_team2_5.printStats();
-
-					p_team2_6.calculateEfficiency();
-					p_team2_6.printPlayer();
-					p_team2_6.printStats();
-
-					p_team2_7.calculateEfficiency();
-					p_team2_7.printPlayer();
-					p_team2_7.printStats();
-
-					p_team2_8.calculateEfficiency();
-					p_team2_8.printPlayer();
-					p_team2_8.printStats();
-
-					p_team2_9.calculateEfficiency();
-					p_team2_9.printPlayer();
-					p_team2_9.printStats();
-
-					p_team2_10.calculateEfficiency();
-					p_team2_10.printPlayer();
-					p_team2_10.printStats();
-
-				}*/
+				p_team1_10.calculateEfficiency();
+				p_team1_10.printPlayer();
+				p_team1_10.printStats();*/
+			}
 		System.out.println("-----------------------End");
 	}
 
-	private static double calOffRating() {
-		double p1_offensive = calIndiviOffRating(p_team1_playing5[0])/p_team1_playing5[0].getMinPG();
-		//double p2_offensive = calIndiviOffRating(p_team1_playing5[1])/p_team1_playing5[1].getMinPG();
-		//double p3_offensive = calIndiviOffRating(p_team1_playing5[2])/p_team1_playing5[2].getMinPG();
-	//	double p4_offensive = calIndiviOffRating(p_team1_playing5[3])/p_team1_playing5[3].getMinPG();
-//		double p5_offensive = calIndiviOffRating(p_team1_playing5[4])/p_team1_playing5[4].getMinPG();
-		
-		
-		
-		return p1_offensive;
-	}
-	private static double calDefRating(){
-		double p1_defensive = calIndiviDefRating(p_team1_playing5[0])/p_team1_playing5[0].getMinPG();
-		//	double p2_defensive = calIndiviDefRating(p_team1_playing5[1])/p_team1_playing5[1].getMinPG();
-//			double p3_defensive = calIndiviDefRating(p_team1_playing5[2])/p_team1_playing5[2].getMinPG();
-			//double p4_defensive = calIndiviDefRating(p_team1_playing5[3])/p_team1_playing5[3].getMinPG();
-		//	double p5_defensive = calIndiviDefRating(p_team1_playing5[4])/p_team1_playing5[4].getMinPG();
-		return p1_defensive;
-			
-	}
-	private static double calIndiviOffRating(player p){
-	double rating=(
-		p.getPpg()
-	+	p.getApg()+p.getoRpg()
-		-p.getTurnovers()
-	+	p.getFgPercent()
-	+	p.getFtPercent()
-	+	p.getThreeptPercent()
-	+	p.getTwoptPercent())/8;
+	private double calOffRating() {
+		double p1_offensive = calIndiviOffRating(p_team1_playing5[0])
+				/ p_team1_playing5[0].getMinPG();
+		double p2_offensive = calIndiviOffRating(p_team1_playing5[1])
+				/ p_team1_playing5[1].getMinPG();
+		double p3_offensive = calIndiviOffRating(p_team1_playing5[2])
+				/ p_team1_playing5[2].getMinPG();
+		double p4_offensive = calIndiviOffRating(p_team1_playing5[3])
+				/ p_team1_playing5[3].getMinPG();
+		double p5_offensive = calIndiviOffRating(p_team1_playing5[4])
+				/ p_team1_playing5[4].getMinPG();
 
-	
-	System.out.println(rating);
-	
+		return p1_offensive + p2_offensive + p3_offensive + p4_offensive
+				+ p5_offensive;
+	}
 
+	private double calDefRating() {
+		double p1_defensive = calIndiviDefRating(p_team1_playing5[0])
+				/ p_team1_playing5[0].getMinPG();
+		double p2_defensive = calIndiviDefRating(p_team1_playing5[1])
+				/ p_team1_playing5[1].getMinPG();
+		double p3_defensive = calIndiviDefRating(p_team1_playing5[2])
+				/ p_team1_playing5[2].getMinPG();
+		double p4_defensive = calIndiviDefRating(p_team1_playing5[3])
+				/ p_team1_playing5[3].getMinPG();
+		double p5_defensive = calIndiviDefRating(p_team1_playing5[4])
+				/ p_team1_playing5[4].getMinPG();
+		return p1_defensive + p2_defensive + p3_defensive + p4_defensive
+				+ p5_defensive;
+
+	}
+
+	private double calIndiviOffRating(player p) {
+		double rating = (p.getPpg() + p.getApg() + p.getoRpg()
+				- p.getTurnovers() + p.getFgPercent() + p.getFtPercent()
+				+ p.getThreeptPercent() + p.getTwoptPercent()) / 8;
 		return rating;
-		
 	}
 
-	private static double calIndiviDefRating(player p){
-		double rating=(p.getdRpg()
-	+	p.getBpg()
-	-p.getFpg()
-	+p.getBlockPercent())/4;
-			return rating;
-			
-		}
-	
-	private static void setPlayerStats(player p) {
+	private double calIndiviDefRating(player p) {
+		double rating = (p.getdRpg() + p.getBpg() - p.getFpg() + p
+				.getBlockPercent()) / 4;
+		return rating;
+
+	}
+
+	private void setPlayerStats(player p) {
 		ArrayList<Integer> refToKeep = new ArrayList<Integer>();
 
 		for (String string : StatsNameList) {
@@ -730,21 +434,20 @@ public class team {
 					break;
 				}
 			}
-
-		}System.out.println("c:"+p.getAssists());
+		}
 		// Clean up stats list
-		//reveresed so changing indices do not effect next removal
+		// reveresed so changing indices do not effect next removal
 		Collections.sort(refToKeep, Collections.reverseOrder());
 
-			for (int j = StatsNameList.size()-1; j > 0; j--) {
-				if (refToKeep.contains(j)){
-					
-				}
-			else{
-			StatsNameList.remove(j);
-				StatsValueList.remove(j);
-		}
+		for (int j = StatsNameList.size() - 1; j > 0; j--) {
+			if (refToKeep.contains(j)) {
 
-	}}
+			} else {
+				StatsNameList.remove(j);
+				StatsValueList.remove(j);
+			}
+
+		}
+	}
 
 }
