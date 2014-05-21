@@ -10,6 +10,8 @@ public class team {
 
 	boolean error = false;
 
+	center superPlayer = new center();
+	
 	center p_team1_1 = new center();
 	smallForward p_team1_2 = new smallForward();
 	powerForward p_team1_3 = new powerForward();
@@ -31,6 +33,16 @@ public class team {
 	playerStatParser sp_team1_4;
 	playerStatParser sp_team1_5;
 	
+	double oRating;
+	double dRating;
+	public double getoRating() {
+		return oRating;
+	}
+
+	public double getdRating() {
+		return dRating;
+	}
+
 	public team(ArrayList<playerStatParser> playerParsers) {
 	
 		sp_team1_1 = playerParsers.get(0);
@@ -82,7 +94,6 @@ public class team {
 			}
 		}
 		
-
 		if (!error) {
 			StatsNameList = sp_team1_3.getplayerStatNameList();
 			StatsValueList = sp_team1_3.getplayerStatValueList();
@@ -206,8 +217,8 @@ public class team {
 			// p_team1_5.printPlayer();
 			// p_team1_5.printStats();
 
-			System.out.println("off: " + calOffRating());
-			System.out.println("def: " + calDefRating());
+			oRating= calOffRating();
+			dRating = calDefRating();
 
 			/*	p_team1_6.calculateEfficiency();
 				p_team1_6.printPlayer();
@@ -230,6 +241,38 @@ public class team {
 				p_team1_10.printStats();*/
 			}
 		System.out.println("-----------------------End");
+	}
+	
+	private void setSuperPlayer(){
+		superPlayer.setBirthPlace("Canada");
+		superPlayer.setBirthdate("1995-10-19");
+		superPlayer.setName("The Magician");
+		superPlayer.setHeight(8);
+		superPlayer.setWeight(200);
+		superPlayer.setExperience(30);
+		superPlayer.setNumber(6969);
+		superPlayer.setAssists();
+		superPlayer.setBlockAttempt();
+		superPlayer.setBlocks();
+		superPlayer.setDefRebounds();
+		superPlayer.setFgAttempt();
+		superPlayer.setFgMade();
+		superPlayer.setFlagrantFouls();
+		superPlayer.setPersonalFouls();
+		superPlayer.setTechFouls();
+		superPlayer.setFtAttempt();
+		superPlayer.setFtMade();
+		superPlayer.setgPlay();
+		superPlayer.setgStart();
+		superPlayer.setMinutesPlayed();
+		superPlayer.setOffRebounds();
+		superPlayer.setPoints();
+		superPlayer.setSteals();
+		superPlayer.setThreeptAttempt();
+		superPlayer.setThreeptMade();
+		superPlayer.setTurnovers();
+		superPlayer.setTwoptAttempt();
+		superPlayer.setTwoptMade();
 	}
 
 	private double calOffRating() {
