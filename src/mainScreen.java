@@ -1,6 +1,7 @@
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Component;
+import java.awt.Container;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Graphics2D;
@@ -24,9 +25,12 @@ import javax.swing.SwingConstants;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 
-public class mainScreen extends JPanel implements ActionListener {
+public class mainScreen extends JFrame implements ActionListener {
 	JLabel team1_image;
 	JLabel team2_image;
+	
+	String teamName1 ="";
+	String teamName2 ="";
 
 	public mainScreen() {
 		try {
@@ -107,15 +111,24 @@ public class mainScreen extends JPanel implements ActionListener {
 
 		panel2.add(team2_image);
 		panel2.add(team2_list);
-
+		
 		panel.setLayout(new BoxLayout(panel, BoxLayout.X_AXIS));
 		panel.add(panel1);
 		panel.add(new JSeparator(SwingConstants.VERTICAL));
 		panel.add(panel2);
 
 		JButton nextButton = new JButton("Next");
-
 		this.add(nextButton);
+		nextButton.addActionListener( new ActionListener()
+		{
+		    public void actionPerformed(ActionEvent e)
+		    {
+		teamName1=team1_list.getSelectedItem().toString();
+				teamName2 = team2_list.getSelectedItem().toString();
+		dispose();
+		    	playerSelectScreen p =new playerSelectScreen(teamName1,teamName2);
+		    }
+		});
 		panel3.add(panel);
 		panel3.add(nextButton);
 		add(panel3);
@@ -130,6 +143,18 @@ public class mainScreen extends JPanel implements ActionListener {
 		panel2.setBackground(Color.WHITE); 
 		panel3.setOpaque(true);   
 		panel3.setBackground(Color.WHITE); 
+		
+		Container cp = getContentPane();
+	
+
+		cp.add(panel3);
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // Handle the CLOSE
+														// button
+		setTitle("Triangle Solver");
+		pack(); // pack all the components in the JFrame
+		setVisible(true); // show it
+
+		requestFocus();
 	}
 
 
@@ -170,27 +195,10 @@ public class mainScreen extends JPanel implements ActionListener {
 		}
 	}
 
-	private static void createAndShowGUI() {
-		// Create and set up the window.
-		JFrame frame = new JFrame("ComboBoxDemo");
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-
-		// Create and set up the content pane.
-		JComponent newContentPane = new mainScreen();
-		newContentPane.setOpaque(true); // content panes must be opaque
-		frame.setContentPane(newContentPane);
-
-		newContentPane.setBackground(Color.WHITE); 
-		frame.pack();
-		frame.setVisible(true);
-	}
-
-	public static void main(String[] args) {
-		// Schedule a job for the event-dispatching thread:
-		// creating and showing this application's GUI.
+		public static void main(String[] args) {
 		javax.swing.SwingUtilities.invokeLater(new Runnable() {
 			public void run() {
-				createAndShowGUI();
+			new mainScreen();
 			}
 		});
 	}

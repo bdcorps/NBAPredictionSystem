@@ -44,6 +44,10 @@ public class playerStatParser {
 	ArrayList<String> playerStatNameList = new ArrayList<String>();
 	ArrayList<String> playerStatValueList = new ArrayList<String>();
 
+	public ArrayList<String> getPlayerNameList() {
+		return playerNameList;
+	}
+
 	public ArrayList<String> getplayerStatNameList() {
 		return playerStatNameList;
 	}
@@ -136,6 +140,57 @@ public class playerStatParser {
 			playerStatValueList = null;
 		}
 	}
+	
+	public playerStatParser(String teamName) {
+		this.teamName = teamName;
+
+		if (!error) {
+			try { 
+				DocumentBuilderFactory dbf = DocumentBuilderFactory
+						.newInstance();
+				DocumentBuilder db = dbf.newDocumentBuilder();
+				Document doc = db.parse(new URL(
+						"http://api.sportsdatallc.org/nba-t3/league/hierarchy.xml?api_key="
+								+ api1).openStream());
+				if (doc.hasChildNodes()) {
+					printNote(doc.getChildNodes());
+				}
+
+				if (teamNameList.contains(teamName)) {
+					teamID = teamIDList.get(teamNameList.indexOf(teamName));
+				}
+
+			} catch (Exception e) {
+				System.out.println("Error Checkpoint 1: " + e.getMessage());
+				error = true;
+			}
+		}
+
+		if (!error) {
+			if (!teamID.equals("")) {
+				try {
+					DocumentBuilderFactory dbf = DocumentBuilderFactory
+							.newInstance();
+					DocumentBuilder db = dbf.newDocumentBuilder();
+					Document doc = db.parse(new URL(
+							"http://api.sportsdatallc.org/nba-t3/teams/"
+									+ teamID + "/profile.xml?api_key=" + api2)
+							.openStream());
+					if (doc.hasChildNodes()) {
+						printNote(doc.getChildNodes());
+					}
+
+
+				} catch (Exception e) {
+					System.out.println("Error Checkpoint 2: " + e.getMessage());
+					error = true;
+				}
+			}
+
+					}
+	}
+	
+	
 
 	/**Separates the nodes and grabs the attribute values
 	 * @param nodeList Xml page nodeList
@@ -168,9 +223,7 @@ public class playerStatParser {
 
 				}
 			}
-
 		}
-
 	}
 
 	String tempteamName = "";

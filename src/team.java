@@ -10,8 +10,8 @@ public class team {
 
 	boolean error = false;
 
-	center superPlayer = new center();
-	
+	center sp = new center();
+
 	center p_team1_1 = new center();
 	smallForward p_team1_2 = new smallForward();
 	powerForward p_team1_3 = new powerForward();
@@ -32,9 +32,27 @@ public class team {
 	playerStatParser sp_team1_3;
 	playerStatParser sp_team1_4;
 	playerStatParser sp_team1_5;
-	
+
 	double oRating;
 	double dRating;
+
+	// offensive stat weights
+	double weight_exp = 0.10;
+	double weight_ppg = 0.15;
+	double weight_apg = 0.5;
+	double weight_orpg = 0.20;
+	double weight_turnover = 0.25;
+	double weight_fgPercent = 0.10;
+	double weight_ftPercent = 0.5;
+	double weight_threePoint =0.5;
+	double weight_twoPoint =0.5;
+
+	// defensive stat weights
+	double weight_dRpg = 0.20;
+			double weight_BlockPercent = 0.20;
+			double weight_Fpg=0.30;
+			double weight_spg = 0.30;
+			
 	public double getoRating() {
 		return oRating;
 	}
@@ -43,20 +61,21 @@ public class team {
 		return dRating;
 	}
 
-	public team(ArrayList<playerStatParser> playerParsers) {
-	
+	public team(ArrayList<playerStatParser> playerParsers, int offRating, int defRating) {
 		sp_team1_1 = playerParsers.get(0);
 		sp_team1_2 = playerParsers.get(1);
 		sp_team1_3 = playerParsers.get(2);
 		sp_team1_4 = playerParsers.get(3);
 		sp_team1_5 = playerParsers.get(4);
-		
-		
+
 		p_team1_playing5[0] = p_team1_1;
 		p_team1_playing5[1] = p_team1_2;
 		p_team1_playing5[2] = p_team1_3;
 		p_team1_playing5[3] = p_team1_4;
 		p_team1_playing5[4] = p_team1_5;
+
+		setSuperPlayer();
+		sp.calculateEfficiency();
 
 		// increasing offence of other team same as decreasing defence of our
 		// team
@@ -82,7 +101,6 @@ public class team {
 			}
 		}
 
-		
 		if (!error) {
 			StatsNameList = sp_team1_2.getplayerStatNameList();
 			StatsValueList = sp_team1_2.getplayerStatValueList();
@@ -93,7 +111,7 @@ public class team {
 				setPlayerStats(p_team1_2);
 			}
 		}
-		
+
 		if (!error) {
 			StatsNameList = sp_team1_3.getplayerStatNameList();
 			StatsValueList = sp_team1_3.getplayerStatValueList();
@@ -104,7 +122,6 @@ public class team {
 				setPlayerStats(p_team1_3);
 			}
 		}
-		
 
 		if (!error) {
 			StatsNameList = sp_team1_4.getplayerStatNameList();
@@ -116,7 +133,6 @@ public class team {
 				setPlayerStats(p_team1_4);
 			}
 		}
-		
 
 		if (!error) {
 			StatsNameList = sp_team1_5.getplayerStatNameList();
@@ -128,7 +144,6 @@ public class team {
 				setPlayerStats(p_team1_5);
 			}
 		}
-	
 
 		/*	if (!error) {
 				playerStatParser sp_team1_6 = new playerStatParser("Miami Heat",
@@ -217,7 +232,7 @@ public class team {
 			// p_team1_5.printPlayer();
 			// p_team1_5.printStats();
 
-			oRating= calOffRating();
+			oRating = calOffRating();
 			dRating = calDefRating();
 
 			/*	p_team1_6.calculateEfficiency();
@@ -239,43 +254,43 @@ public class team {
 				p_team1_10.calculateEfficiency();
 				p_team1_10.printPlayer();
 				p_team1_10.printStats();*/
-			}
+		}
 		System.out.println("-----------------------End");
 	}
-	
-	private void setSuperPlayer(){
-		superPlayer.setBirthPlace("Canada");
-		superPlayer.setBirthdate("1995-10-19");
-		superPlayer.setName("The Magician");
-		superPlayer.setHeight(8);
-		superPlayer.setWeight(200);
-		superPlayer.setExperience(30);
-		superPlayer.setNumber(6969);
-		superPlayer.setAssists();
-		superPlayer.setBlockAttempt();
-		superPlayer.setBlocks();
-		superPlayer.setDefRebounds();
-		superPlayer.setFgAttempt();
-		superPlayer.setFgMade();
-		superPlayer.setFlagrantFouls();
-		superPlayer.setPersonalFouls();
-		superPlayer.setTechFouls();
-		superPlayer.setFtAttempt();
-		superPlayer.setFtMade();
-		superPlayer.setgPlay();
-		superPlayer.setgStart();
-		superPlayer.setMinutesPlayed();
-		superPlayer.setOffRebounds();
-		superPlayer.setPoints();
-		superPlayer.setSteals();
-		superPlayer.setThreeptAttempt();
-		superPlayer.setThreeptMade();
-		superPlayer.setTurnovers();
-		superPlayer.setTwoptAttempt();
-		superPlayer.setTwoptMade();
+
+	private void setSuperPlayer() {
+		sp.setBirthPlace("Canada");
+		sp.setBirthdate("1995-10-19");
+		sp.setName("The Magician");
+		sp.setHeight(8);
+		sp.setWeight(200);
+		sp.setExperience(75);
+		sp.setNumber(6969);
+		sp.setAssists(1000);
+		sp.setBlockAttempt(2500);
+		sp.setBlocks(2500);
+		sp.setDefRebounds(2500);
+		sp.setFgAttempt(5000);
+		sp.setFgMade(5000);
+		sp.setFlagrantFouls(1000);
+		sp.setPersonalFouls(1000);
+		sp.setTechFouls(1000);
+		sp.setFtAttempt(500);
+		sp.setFtMade(500);
+		sp.setgPlay(1000);
+		sp.setgStart(1000);
+		sp.setMinutesPlayed(10000);
+		sp.setOffRebounds(2500);
+		sp.setPoints(10000);
+		sp.setSteals(1000);
+		sp.setThreeptAttempt(500);
+		sp.setThreeptMade(500);
+		sp.setTurnovers(1000);
+		sp.setTwoptAttempt(10000);
+		sp.setTwoptMade(10000);
 	}
 
-	private double calOffRating() {
+	public double calOffRating() {
 		double p1_offensive = calIndiviOffRating(p_team1_playing5[0])
 				/ p_team1_playing5[0].getMinPG();
 		double p2_offensive = calIndiviOffRating(p_team1_playing5[1])
@@ -291,7 +306,7 @@ public class team {
 				+ p5_offensive;
 	}
 
-	private double calDefRating() {
+	public double calDefRating() {
 		double p1_defensive = calIndiviDefRating(p_team1_playing5[0])
 				/ p_team1_playing5[0].getMinPG();
 		double p2_defensive = calIndiviDefRating(p_team1_playing5[1])
@@ -304,24 +319,28 @@ public class team {
 				/ p_team1_playing5[4].getMinPG();
 		return p1_defensive + p2_defensive + p3_defensive + p4_defensive
 				+ p5_defensive;
-
 	}
-
-	private double calIndiviOffRating(player p) {
-		double rating = (p.getPpg() + p.getApg() + p.getoRpg()
-				- p.getTurnovers() + p.getFgPercent() + p.getFtPercent()
-				+ p.getThreeptPercent() + p.getTwoptPercent()) / 8;
+	
+	public double calIndiviOffRating(player p) {
+		double rating = ((p.getExperience() / sp.getExperience())*weight_exp + (p.getPpg()
+				/ sp.getPpg())*weight_ppg + (p.getApg() / p.getApg())*weight_apg + (p.getoRpg()
+				/ sp.getoRpg())*weight_orpg - (p.getTurnovers() / sp.getTurnovers())*weight_turnover
+				+ (p.getFgPercent() / sp.getFgPercent())*weight_fgPercent + (p.getFtPercent()
+				/ sp.getFtPercent())*weight_ftPercent + (p.getThreeptPercent()
+				/ sp.getThreeptPercent())*weight_threePoint + (p.getTwoptPercent()
+				/ sp.getTwoptPercent())*weight_twoPoint) / 8;
 		return rating;
 	}
+	
 
-	private double calIndiviDefRating(player p) {
-		double rating = (p.getdRpg() + p.getBpg() - p.getFpg() + p
-				.getBlockPercent()) / 4;
+	public double calIndiviDefRating(player p) {
+		double rating = ((p.getdRpg() / sp.getdRpg())*weight_dRpg - (p.getFpg() / sp.getFpg())*weight_Fpg + (p.getBlockPercent()
+				/ sp.getBlockPercent())*weight_BlockPercent+(p.getSpg()/sp.getSpg())*weight_spg) / 4;
 		return rating;
 
 	}
 
-	private void setPlayerStats(player p) {
+	public void setPlayerStats(player p) {
 		ArrayList<Integer> refToKeep = new ArrayList<Integer>();
 
 		for (String string : StatsNameList) {
