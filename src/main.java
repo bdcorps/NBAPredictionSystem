@@ -54,8 +54,6 @@ public class main {
 
 		System.out.println("team1");
 		team team1 = new team(team1_parsers, 0,0);
-		System.out.println("off: " + team1.getoRating());
-		System.out.println("def: " + team1.getdRating());
 
 		System.out.println("team 1 overall: "+(team1.getoRating() + team1.getdRating())/2);
 		try {
@@ -108,14 +106,35 @@ public class main {
 		team2_parsers.add(sp_team2_3);
 		team2_parsers.add(sp_team2_4);
 		team2_parsers.add(sp_team2_5);
-
-		System.out.println("team2");
 		team team2 = new team(team2_parsers, 0,0);
-		System.out.println("off: " + team2.getoRating());
-		System.out.println("def: " + team2.getdRating());
+		
+double t1Off =  team1.getoRating();
+double t1Def =  team1.getdRating();
 
-		System.out.println("team 2 overall: "+(team2.getoRating() + team2.getdRating())/2);
-		System.out.println("winner: " + getWinner(team1, team2));
+double t2Off =  team2.getoRating();
+double t2Def =  team2.getdRating();
+
+System.out.println(" 1 off: " + t1Off);
+System.out.println(" 1 def: " + t1Def);
+
+	//	System.out.println(" 2 off: " + t2Off);
+		//System.out.println(" 2 def: " + t2Def);
+
+		try {
+			Thread.sleep(1000);
+		} catch (InterruptedException e1) {
+			e1.printStackTrace();
+		}
+	 team1 = new team(team1_parsers, 0.4,0.4);
+		 team2 = new team(team2_parsers, t1Off,t1Def);
+		
+
+		//	System.out.println("after 1 off: " + team1.getoRating());
+			//System.out.println("after 1 def: " + team1.getdRating());
+			
+			System.out.println("after 2 off: " + team2.getoRating());
+			System.out.println("after 2 def: " + team2.getdRating());
+		
 
 	}
 

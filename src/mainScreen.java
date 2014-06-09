@@ -58,6 +58,45 @@ public class mainScreen extends JFrame implements ActionListener {
 				"Los Angeles Clippers", "Los Angeles Lakers", "Phoenix Suns",
 				"Sacramento Kings" };
 
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		/*
+		 * 
+		 * 
+		 * 
+		 * 
+		 * 
+		 * 
+		 * 
+		 * 
+		 * 
+		 * 
+		 * 
+		 * 
+		 * 
+		 * 
+		 * 
+		 * 
+		 * 
+		 * 
+		 * 
+		 * 
+		 * REMEMBER
+		 * 
+		 * minute played shit
+		 * 
+		 */
 		panel1.setBorder(BorderFactory.createEmptyBorder(30, 30, 30, 30));
 		panel2.setBorder(BorderFactory.createEmptyBorder(30, 30, 30, 30));
 

@@ -18,8 +18,10 @@ public class playerSelectScreen extends JFrame {
 	
 	DragPanel p1 = new DragPanel();
 	DragPanel p11 = new DragPanel();
+	
 
-	public playerSelectScreen(String teamName1, String teamName2) {
+	public playerSelectScreen(final String teamName1,final String teamName2) {
+	
 		Box panel1 = Box.createVerticalBox();
 		playerStatParser v = new playerStatParser(teamName1);
 		ArrayList<String> team1AllPlayers = new ArrayList<String>();
@@ -156,9 +158,59 @@ public class playerSelectScreen extends JFrame {
 				System.out.println("playing2 : "+team2PlayingPlayers.toString());
 				System.out.println("benched2: "+team2BenchedPlayers.toString());
 
+				ArrayList<playerStatParser> team1_parsers = new ArrayList<playerStatParser>();
+				for (String playerString : team1PlayingPlayers) {
+					try {
+						Thread.sleep(1000);
+					} catch (InterruptedException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
+					team1_parsers.add(new playerStatParser(teamName1,playerString));
+				}
 				
+				ArrayList<playerStatParser> team2_parsers = new ArrayList<playerStatParser>();
+				for (String playerString : team2PlayingPlayers) {
+					try {
+						Thread.sleep(1000);
+					} catch (InterruptedException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
+					team2_parsers.add(new playerStatParser(teamName2,playerString));
+				}
+
+				team team1 = new team(team1_parsers, 0,0);
+				team team2 = new team(team2_parsers, 0,0);
 				
-				
+				double t1Off =  team1.getoRating();
+				double t1Def =  team1.getdRating();
+
+				double t2Off =  team2.getoRating();
+				double t2Def =  team2.getdRating();
+
+				System.out.println(" 1 off: " + t1Off);
+				System.out.println(" 1 def: " + t1Def);
+
+						System.out.println(" 2 off: " + t2Off);
+						System.out.println(" 2 def: " + t2Def);
+
+						try {
+							Thread.sleep(1000);
+						} catch (InterruptedException e1) {
+							e1.printStackTrace();
+						}
+					 team1 = new team(team1_parsers, t2Off,t2Def);
+						 team2 = new team(team2_parsers, t1Off,t1Def);
+						
+
+							System.out.println("after 1 off: " + team1.getoRating());
+							System.out.println("after 1 def: " + team1.getdRating());
+							
+							System.out.println("after 2 off: " + team2.getoRating());
+							System.out.println("after 2 def: " + team2.getdRating());
+						
+
 				dispose();
 				//playerSelectScreen p = new playerSelectScreen("s", "");
 			}

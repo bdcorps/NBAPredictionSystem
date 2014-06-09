@@ -33,6 +33,9 @@ public class team {
 	playerStatParser sp_team1_4;
 	playerStatParser sp_team1_5;
 
+double offRating;
+	double defRating;
+	
 	double oRating;
 	double dRating;
 
@@ -61,7 +64,10 @@ public class team {
 		return dRating;
 	}
 
-	public team(ArrayList<playerStatParser> playerParsers, int offRating, int defRating) {
+	public team(ArrayList<playerStatParser> playerParsers, double offRating, double defRating) {
+		this.offRating=offRating;
+		this.defRating =defRating;
+		
 		sp_team1_1 = playerParsers.get(0);
 		sp_team1_2 = playerParsers.get(1);
 		sp_team1_3 = playerParsers.get(2);
@@ -144,73 +150,6 @@ public class team {
 				setPlayerStats(p_team1_5);
 			}
 		}
-
-		/*	if (!error) {
-				playerStatParser sp_team1_6 = new playerStatParser("Miami Heat",
-						"Ray Allen");
-				StatsNameList = sp_team1_6.getplayerStatNameList();
-				StatsValueList = sp_team1_6.getplayerStatValueList();
-
-				if (StatsNameList == null || StatsValueList == null) {
-					error = true;
-				} else {
-					setPlayerStats(p_team1_6);
-				}
-			}
-			
-
-			if (!error) {
-				playerStatParser sp_team1_7 = new playerStatParser("Miami Heat",
-						"Mario Chalmers");
-				StatsNameList = sp_team1_7.getplayerStatNameList();
-				StatsValueList = sp_team1_7.getplayerStatValueList();
-				if (StatsNameList == null || StatsValueList == null) {
-					error = true;
-				} else {
-					setPlayerStats(p_team1_7);
-				}
-			}
-			
-			if (!error) {
-				playerStatParser sp_team1_8 = new playerStatParser("Miami Heat",
-						"Norris Cole");
-				StatsNameList = sp_team1_8.getplayerStatNameList();
-				StatsValueList = sp_team1_8.getplayerStatValueList();
-
-				if (StatsNameList == null || StatsValueList == null) {
-					error = true;
-				} else {
-					setPlayerStats(p_team1_8);
-				}
-			}
-		
-			if (!error) {
-				playerStatParser sp_team1_9 = new playerStatParser("Miami Heat",
-						"Shane Battier");
-				StatsNameList = sp_team1_9.getplayerStatNameList();
-				StatsValueList = sp_team1_9.getplayerStatValueList();
-
-				if (StatsNameList == null || StatsValueList == null) {
-					error = true;
-				} else {
-					setPlayerStats(p_team1_9);
-				}
-			}
-			
-			if (!error) {
-				playerStatParser sp_team1_10 = new playerStatParser("Miami Heat",
-						"James Jones");
-				StatsNameList = sp_team1_10.getplayerStatNameList();
-				StatsValueList = sp_team1_10.getplayerStatValueList();
-
-				if (StatsNameList == null || StatsValueList == null) {
-					error = true;
-				} else {
-					setPlayerStats(p_team1_10);
-				}
-			}
-			*/
-
 		if (!error) {
 			p_team1_1.calculateEfficiency();
 			// p_team1_1.printPlayer();
@@ -255,7 +194,7 @@ public class team {
 				p_team1_10.printPlayer();
 				p_team1_10.printStats();*/
 		}
-		System.out.println("-----------------------End");
+	//	System.out.println("-----------------------End");
 	}
 
 	private void setSuperPlayer() {
@@ -302,8 +241,8 @@ public class team {
 		double p5_offensive = calIndiviOffRating(p_team1_playing5[4])
 				/ p_team1_playing5[4].getMinPG();
 
-		return p1_offensive + p2_offensive + p3_offensive + p4_offensive
-				+ p5_offensive;
+		return (p1_offensive + p2_offensive + p3_offensive + p4_offensive
+				+ p5_offensive)*10;
 	}
 
 	public double calDefRating() {
@@ -317,25 +256,25 @@ public class team {
 				/ p_team1_playing5[3].getMinPG();
 		double p5_defensive = calIndiviDefRating(p_team1_playing5[4])
 				/ p_team1_playing5[4].getMinPG();
-		return p1_defensive + p2_defensive + p3_defensive + p4_defensive
-				+ p5_defensive;
+		return (p1_defensive + p2_defensive + p3_defensive + p4_defensive
+				+ p5_defensive)*10;
 	}
 	
 	public double calIndiviOffRating(player p) {
-		double rating = ((p.getExperience() / sp.getExperience())*weight_exp + (p.getPpg()
-				/ sp.getPpg())*weight_ppg + (p.getApg() / p.getApg())*weight_apg + (p.getoRpg()
-				/ sp.getoRpg())*weight_orpg - (p.getTurnovers() / sp.getTurnovers())*weight_turnover
-				+ (p.getFgPercent() / sp.getFgPercent())*weight_fgPercent + (p.getFtPercent()
-				/ sp.getFtPercent())*weight_ftPercent + (p.getThreeptPercent()
-				/ sp.getThreeptPercent())*weight_threePoint + (p.getTwoptPercent()
-				/ sp.getTwoptPercent())*weight_twoPoint) / 8;
+		double rating = (valueMod(((double)p.getExperience() / sp.getExperience())*weight_exp,defRating) +valueMod( ((double)p.getPpg()
+				/ sp.getPpg())*weight_ppg,offRating) +valueMod( ((double)p.getApg() / p.getApg())*weight_apg,offRating) +valueMod( ((double)p.getoRpg()
+				/ sp.getoRpg())*weight_orpg,offRating) - valueMod(((double)p.getTurnovers() / sp.getTurnovers())*weight_turnover,offRating)
+				+valueMod( ((double)p.getFgPercent() / sp.getFgPercent())*weight_fgPercent,offRating) +valueMod( ((double)p.getFtPercent()
+				/ sp.getFtPercent())*weight_ftPercent,offRating) +valueMod( ((double)p.getThreeptPercent()
+				/ sp.getThreeptPercent())*weight_threePoint,offRating) +valueMod( ((double)p.getTwoptPercent()
+				/ sp.getTwoptPercent())*weight_twoPoint,offRating)) / 9;
 		return rating;
 	}
 	
 
 	public double calIndiviDefRating(player p) {
-		double rating = ((p.getdRpg() / sp.getdRpg())*weight_dRpg - (p.getFpg() / sp.getFpg())*weight_Fpg + (p.getBlockPercent()
-				/ sp.getBlockPercent())*weight_BlockPercent+(p.getSpg()/sp.getSpg())*weight_spg) / 4;
+		double rating = (valueMod(((double)p.getExperience() / sp.getExperience())*weight_exp,offRating)+valueMod(((double)p.getdRpg() / sp.getdRpg())*weight_dRpg,offRating) - valueMod(((double)p.getFpg() / sp.getFpg())*weight_Fpg,offRating) +valueMod( ((double)p.getBlockPercent()
+				/ sp.getBlockPercent())*weight_BlockPercent,offRating)+valueMod(((double)p.getSpg()/sp.getSpg())*weight_spg,offRating)) / 5;
 		return rating;
 
 	}
@@ -385,8 +324,8 @@ public class team {
 					refToKeep.add(ind);
 					break;
 				case "assists":
-					p.setAssists(((int) Double.parseDouble(StatsValueList
-							.get(ind))));
+					p.setAssists((int) Double.parseDouble(StatsValueList
+							.get(ind)));
 					refToKeep.add(ind);
 					break;
 				case "blocked_att":
@@ -510,6 +449,12 @@ public class team {
 			}
 
 		}
+	}
+
+	private double valueMod(double d, double modFactor) {double modded =d;
+		if (modFactor!=0){
+		modded = d + (d * (0.5-modFactor));
+		}return modded;
 	}
 
 }
