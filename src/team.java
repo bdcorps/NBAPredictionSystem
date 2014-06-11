@@ -34,9 +34,9 @@ public class team {
 	playerStatParser sp_team1_4;
 	playerStatParser sp_team1_5;
 
-double offRating;
+	double offRating;
 	double defRating;
-	
+
 	double oRating;
 	double dRating;
 
@@ -48,15 +48,15 @@ double offRating;
 	double weight_turnover = 0.25;
 	double weight_fgPercent = 0.10;
 	double weight_ftPercent = 0.5;
-	double weight_threePoint =0.5;
-	double weight_twoPoint =0.5;
+	double weight_threePoint = 0.5;
+	double weight_twoPoint = 0.5;
 
 	// defensive stat weights
 	double weight_dRpg = 0.20;
-			double weight_BlockPercent = 0.20;
-			double weight_Fpg=0.30;
-			double weight_spg = 0.30;
-			
+	double weight_BlockPercent = 0.20;
+	double weight_Fpg = 0.30;
+	double weight_spg = 0.30;
+
 	public double getoRating() {
 		return oRating;
 	}
@@ -65,10 +65,11 @@ double offRating;
 		return dRating;
 	}
 
-	public team(ArrayList<playerStatParser> playerParsers, double offRating, double defRating) {
-		this.offRating=offRating;
-		this.defRating =defRating;
-		
+	public team(ArrayList<playerStatParser> playerParsers, double offRating,
+			double defRating) {
+		this.offRating = offRating;
+		this.defRating = defRating;
+
 		sp_team1_1 = playerParsers.get(0);
 		sp_team1_2 = playerParsers.get(1);
 		sp_team1_3 = playerParsers.get(2);
@@ -195,7 +196,7 @@ double offRating;
 				p_team1_10.printPlayer();
 				p_team1_10.printStats();*/
 		}
-	//	System.out.println("-----------------------End");
+		// System.out.println("-----------------------End");
 	}
 
 	private void setSuperPlayer() {
@@ -242,8 +243,7 @@ double offRating;
 		double p5_offensive = calIndiviOffRating(p_team_playing5[4])
 				/ p_team_playing5[4].getMinPG();
 
-		return (p1_offensive + p2_offensive + p3_offensive + p4_offensive
-				+ p5_offensive)*10;
+		return (p1_offensive + p2_offensive + p3_offensive + p4_offensive + p5_offensive) * 10;
 	}
 
 	public double calDefRating() {
@@ -257,26 +257,28 @@ double offRating;
 				/ p_team_playing5[3].getMinPG();
 		double p5_defensive = calIndiviDefRating(p_team_playing5[4])
 				/ p_team_playing5[4].getMinPG();
-		return (p1_defensive + p2_defensive + p3_defensive + p4_defensive
-				+ p5_defensive)*10;
+		return (p1_defensive + p2_defensive + p3_defensive + p4_defensive + p5_defensive) * 10;
 	}
-	
 
 	public double calIndiviOffRating(player p) {
-		double rating = ((p.getExperience() / sp.getExperience())*weight_exp + (p.getPpg()
-				/ sp.getPpg())*weight_ppg + (p.getApg() / p.getApg())*weight_apg + (p.getoRpg()
-				/ sp.getoRpg())*weight_orpg - (p.getTurnovers() / sp.getTurnovers())*weight_turnover
-				+ (p.getFgPercent() / sp.getFgPercent())*weight_fgPercent + (p.getFtPercent()
-				/ sp.getFtPercent())*weight_ftPercent + (p.getThreeptPercent()
-				/ sp.getThreeptPercent())*weight_threePoint + (p.getTwoptPercent()
-				/ sp.getTwoptPercent())*weight_twoPoint) / 8;
+		double rating = ((p.getExperience() / sp.getExperience()) * weight_exp
+				+ (p.getPpg() / sp.getPpg()) * weight_ppg
+				+ (p.getApg() / p.getApg()) * weight_apg
+				+ (p.getoRpg() / sp.getoRpg()) * weight_orpg
+				- (p.getTurnovers() / sp.getTurnovers()) * weight_turnover
+				+ (p.getFgPercent() / sp.getFgPercent()) * weight_fgPercent
+				+ (p.getFtPercent() / sp.getFtPercent()) * weight_ftPercent
+				+ (p.getThreeptPercent() / sp.getThreeptPercent())
+				* weight_threePoint + (p.getTwoptPercent() / sp
+				.getTwoptPercent()) * weight_twoPoint) / 8;
 		return rating;
 	}
-	
 
 	public double calIndiviDefRating(player p) {
-		double rating = ((p.getdRpg() / sp.getdRpg())*weight_dRpg - (p.getFpg() / sp.getFpg())*weight_Fpg + (p.getBlockPercent()
-				/ sp.getBlockPercent())*weight_BlockPercent+(p.getSpg()/sp.getSpg())*weight_spg) / 4;
+		double rating = ((p.getdRpg() / sp.getdRpg()) * weight_dRpg
+				- (p.getFpg() / sp.getFpg()) * weight_Fpg
+				+ (p.getBlockPercent() / sp.getBlockPercent())
+				* weight_BlockPercent + (p.getSpg() / sp.getSpg()) * weight_spg) / 4;
 		return rating;
 
 	}
@@ -326,58 +328,69 @@ double offRating;
 					refToKeep.add(ind);
 					break;
 				case "assists":
-					p.setAssists(valueMod((int) Double.parseDouble(StatsValueList
-							.get(ind)), defRating));
+					p.setAssists(valueMod(
+							(int) Double.parseDouble(StatsValueList.get(ind)),
+							defRating));
 					refToKeep.add(ind);
 					break;
 				case "blocked_att":
-					p.setBlockAttempt(valueMod((int) Double.parseDouble(StatsValueList
-							.get(ind)), offRating));
+					p.setBlockAttempt(valueMod(
+							(int) Double.parseDouble(StatsValueList.get(ind)),
+							offRating));
 					refToKeep.add(ind);
 					break;
 				case "blocks":
-					p.setBlocks(valueMod((int) Double.parseDouble(StatsValueList
-							.get(ind)), offRating));
+					p.setBlocks(valueMod(
+							(int) Double.parseDouble(StatsValueList.get(ind)),
+							offRating));
 					refToKeep.add(ind);
 					break;
 				case "defensive_rebounds":
-					p.setDefRebounds(valueMod((int) Double.parseDouble(StatsValueList
-							.get(ind)), offRating));
+					p.setDefRebounds(valueMod(
+							(int) Double.parseDouble(StatsValueList.get(ind)),
+							offRating));
 					refToKeep.add(ind);
 					break;
 				case "field_goals_att":
-					p.setFgAttempt(valueMod((int) Double.parseDouble(StatsValueList
-							.get(ind)), defRating));
+					p.setFgAttempt(valueMod(
+							(int) Double.parseDouble(StatsValueList.get(ind)),
+							defRating));
 					refToKeep.add(ind);
 					break;
 				case "field_goals_made":
-					p.setFgMade(valueMod((int) Double.parseDouble(StatsValueList
-							.get(ind)), defRating));
+					p.setFgMade(valueMod(
+							(int) Double.parseDouble(StatsValueList.get(ind)),
+							defRating));
 					refToKeep.add(ind);
 					break;
 				case "flagrant_fouls":
-					p.setFlagrantFouls(valueMod((int) Double.parseDouble(StatsValueList
-							.get(ind)), offRating));
+					p.setFlagrantFouls(valueMod(
+							(int) Double.parseDouble(StatsValueList.get(ind)),
+							offRating));
 					refToKeep.add(ind);
 					break;
 				case "personal_fouls":
-					p.setPersonalFouls(valueMod((int) Double.parseDouble(StatsValueList
-							.get(ind)), offRating));
+					p.setPersonalFouls(valueMod(
+							(int) Double.parseDouble(StatsValueList.get(ind)),
+							offRating));
 					refToKeep.add(ind);
 					break;
 				case "tech_fouls":
-					p.setTechFouls(valueMod((int) Double.parseDouble(StatsValueList
-							.get(ind)), offRating));
+					p.setTechFouls(valueMod(
+							(int) Double.parseDouble(StatsValueList.get(ind)),
+							offRating));
 					refToKeep.add(ind);
 					break;
 				case "free_throws_att":
-					p.setFtAttempt(valueMod((int) Double.parseDouble(StatsValueList
-							.get(ind)), defRating));
+					p.setFtAttempt(valueMod(
+							(int) Double.parseDouble(StatsValueList.get(ind)),
+							defRating));
 					refToKeep.add(ind);
 					break;
 				case "free_throws_made":
-					p.setFtMade(valueMod((int) Double.parseDouble(StatsValueList
-							.get(ind)), defRating));
+					p.setFtMade(valueMod(
+							(int) Double.parseDouble(StatsValueList.get(ind)),
+							defRating));
 					refToKeep.add(ind);
 					break;
 				case "games_played":
@@ -395,45 +408,53 @@ double offRating;
 					refToKeep.add(ind);
 					break;
 				case "offensive_rebounds":
-					
-					p.setOffRebounds(valueMod((int) Double.parseDouble(StatsValueList
-							.get(ind)), defRating));
+
+					p.setOffRebounds(valueMod(
+							(int) Double.parseDouble(StatsValueList.get(ind)),
+							defRating));
 					refToKeep.add(ind);
 					break;
 				case "points":
-					p.setPoints(valueMod((int) Double.parseDouble(StatsValueList
-							.get(ind)), defRating));
+					p.setPoints(valueMod(
+							(int) Double.parseDouble(StatsValueList.get(ind)),
+							defRating));
 					refToKeep.add(ind);
 					break;
 				// rebounds is off and def added
 				case "steals":
-					p.setSteals(valueMod((int) Double.parseDouble(StatsValueList
-							.get(ind)), offRating));
+					p.setSteals(valueMod(
+							(int) Double.parseDouble(StatsValueList.get(ind)),
+							offRating));
 					refToKeep.add(ind);
 					break;
 				case "three_points_att":
-					p.setThreeptAttempt(valueMod((int) Double.parseDouble(StatsValueList
-							.get(ind)), defRating));
+					p.setThreeptAttempt(valueMod(
+							(int) Double.parseDouble(StatsValueList.get(ind)),
+							defRating));
 					refToKeep.add(ind);
 					break;
 				case "three_points_made":
-					p.setThreeptMade(valueMod((int) Double.parseDouble(StatsValueList
-							.get(ind)), defRating));
+					p.setThreeptMade(valueMod(
+							(int) Double.parseDouble(StatsValueList.get(ind)),
+							defRating));
 					refToKeep.add(ind);
 					break;
 				case "turnovers":
-					p.setTurnovers(valueMod((int) Double.parseDouble(StatsValueList
-							.get(ind)), defRating));
+					p.setTurnovers(valueMod(
+							(int) Double.parseDouble(StatsValueList.get(ind)),
+							defRating));
 					refToKeep.add(ind);
 					break;
 				case "two_points_att":
-					p.setTwoptAttempt(valueMod((int) Double.parseDouble(StatsValueList
-							.get(ind)), defRating));
+					p.setTwoptAttempt(valueMod(
+							(int) Double.parseDouble(StatsValueList.get(ind)),
+							defRating));
 					refToKeep.add(ind);
 					break;
 				case "two_points_made":
-					p.setTwoptMade(valueMod((int) Double.parseDouble(StatsValueList
-							.get(ind)), defRating));
+					p.setTwoptMade(valueMod(
+							(int) Double.parseDouble(StatsValueList.get(ind)),
+							defRating));
 					refToKeep.add(ind);
 					break;
 				}
@@ -453,23 +474,28 @@ double offRating;
 
 		}
 	}
-/*
-	public int valueMod(int d, double modFactor) {double modded =d;
-		if (modFactor!=0){
-			modFactor = d + (d * (1-modFactor));
-			 		if(modFactor>0.5){
-			 			modFactor = modFactor * -1;
-			 		}
-			 		modded = d+  modFactor;
-		}return (int)modded;
-	}
-*/
+
+	/*
+		public int valueMod(int d, double modFactor) {double modded =d;
+			if (modFactor!=0){
+				modFactor = d + (d * (1-modFactor));
+				 		if(modFactor>0.5){
+				 			modFactor = modFactor * -1;
+				 		}
+				 		modded = d+  modFactor;
+			}return (int)modded;
+		}*/
+	public Random randomGenerator;
+	public double random;
+
 	private int valueMod(int d, double modFactor) {
-		Random randomGenerator = new Random();
-		double modded =d;
-	if (modFactor!=0){
-//	modded = (d + (d * (0.5-(modFactor))));
-	modded = (d + (d * (0.5-(modFactor))))*(randomGenerator.nextInt(1)+0.5);
-	}return (int)modded;
-}
+		double modded = d;
+		if (modFactor != 0) {
+			randomGenerator = new Random();
+			random = randomGenerator.nextDouble() + 0.75;
+			// modded = (d + (d * (0.5-(modFactor))));
+			modded = (d + (d * (0.5 - (modFactor)))) * (random);
+		}
+		return (int) modded;
+	}
 }

@@ -1,11 +1,25 @@
+import java.awt.BorderLayout;
+import java.awt.Dimension;
 import java.util.ArrayList;
+
+import javax.swing.BorderFactory;
+import javax.swing.Box;
+import javax.swing.JLabel;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
+import javax.swing.table.TableColumn;
 
 public class main {
 
+	static ArrayList<playerStatParser> team1_parsers;
+	static ArrayList<playerStatParser> team2_parsers;
+	
+	static ArrayList<team> teamMatchups =new ArrayList<team>();
+
 	public static void main(String[] args) {
 		int sleepTime = 1000;
-		ArrayList<playerStatParser> team1_parsers = new ArrayList<playerStatParser>();
-		ArrayList<playerStatParser> team2_parsers = new ArrayList<playerStatParser>();
+	team1_parsers = new ArrayList<playerStatParser>();
+	team2_parsers = new ArrayList<playerStatParser>();
 
 		playerStatParser sp_team1_1 = new playerStatParser("San Antonio Spurs",
 				"Kawhi Leonard");
@@ -51,11 +65,6 @@ public class main {
 		team1_parsers.add(sp_team1_3);
 		team1_parsers.add(sp_team1_4);
 		team1_parsers.add(sp_team1_5);
-
-		System.out.println("team1");
-		team team1 = new team(team1_parsers, 0,0);
-
-		System.out.println("team 1 overall: "+(team1.getoRating() + team1.getdRating())/2);
 		try {
 			Thread.sleep(sleepTime);
 		} catch (InterruptedException e) {
@@ -106,37 +115,18 @@ public class main {
 		team2_parsers.add(sp_team2_3);
 		team2_parsers.add(sp_team2_4);
 		team2_parsers.add(sp_team2_5);
-		team team2 = new team(team2_parsers, 0,0);
+
+		team team1 = new team(team1_parsers, 0, 0);
+		team team2 = new team(team2_parsers, 0, 0);
+
 		
-double t1Off =  team1.getoRating();
-double t1Def =  team1.getdRating();
+		for (int i = 0; i <7; i++) {
 
-double t2Off =  team2.getoRating();
-double t2Def =  team2.getdRating();
-
-System.out.println(" 1 off: " + t1Off);
-System.out.println(" 1 def: " + t1Def);
-
-		System.out.println(" 2 off: " + t2Off);
-		System.out.println(" 2 def: " + t2Def);
-
-		try {
-			Thread.sleep(1000);
-		} catch (InterruptedException e1) {
-			e1.printStackTrace();
+			AddMatchUp(team1,team2);
 		}
- team1 = new team(team1_parsers,  t2Off,t2Def);
-		team2 = new team(team2_parsers, t1Off,t1Def);
 		
-
-			System.out.println("after 1 off: " + team1.getoRating());
-		System.out.println("after 1 def: " + team1.getdRating());
-			
-			System.out.println("after 2 off: " + team2.getoRating());
-			System.out.println("after 2 def: " + team2.getdRating());
-		
-
-			new winScreen (team1,team2);
+					
+		winScreen w= new winScreen(teamMatchups);
 	}
 
 	private String getWinner(int p1,int p2) {
@@ -148,5 +138,27 @@ System.out.println(" 1 def: " + t1Def);
 		}
 		return winner;
 	}
+	
+public static void AddMatchUp(team t1 , team t2){
+		
+
+		double t1Off = t1.getoRating();
+		double t1Def = t1.getdRating();
+
+		double t2Off = t2.getoRating();
+		double t2Def = t2.getdRating();
+
+		try {
+			Thread.sleep(1000);
+		} catch (InterruptedException e1) {
+			e1.printStackTrace();
+		}
+		t1 = new team(team1_parsers, t2Off, t2Def);
+		t2 = new team(team2_parsers, t1Off, t1Def);
+		
+		teamMatchups.add(t1);
+		teamMatchups.add(t2);
+	}
+	
 
 }

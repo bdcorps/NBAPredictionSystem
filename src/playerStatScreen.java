@@ -48,42 +48,25 @@ public class playerStatScreen extends JFrame {
 		}
 		
 		Box a = Box.createVerticalBox();
-		Box a1 = Box.createHorizontalBox();
-		Box b1 = Box.createVerticalBox();
+		Box b1 = Box.createHorizontalBox();
 		Box b2 = Box.createVerticalBox();
-		a.add(a1);
-		a1.add(b1);
-		a1.add(b2);
+		Box b3 = Box.createVerticalBox();
+		
 		panel.setPreferredSize(new Dimension(800, 640));
-a.setBorder(BorderFactory.createLineBorder(Color.BLACK));
+//a.setBorder(BorderFactory.createLineBorder(Color.BLACK));
 		team1_image = new JLabel();
 		team1_image.setFont(team1_image.getFont().deriveFont(Font.ITALIC));
 		team1_image.setHorizontalAlignment(JLabel.CENTER);
 		updateLabel(teamName, playerName, team1_image);
 
-		team1_image.setBorder(BorderFactory.createEmptyBorder(0, 0, 50, 0));
+	//	team1_image.setBorder(BorderFactory.createEmptyBorder(0, 0, 50, 0));
 
 		team1_image.setAlignmentX(Component.CENTER_ALIGNMENT);
 
 		b1.add(team1_image);
+		b1.add(new JLabel(playerName));
 
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		JLabel label = new JLabel("d");
-		b2.add(label);
-		
-		JLabel label2 = new JLabel("cc");
-		b2.add(label2);
-		
+		a.add(b1);
 		JButton nextButton = new JButton("Back");
 		nextButton.setAlignmentX(Component.CENTER_ALIGNMENT);
 		a.add(nextButton);

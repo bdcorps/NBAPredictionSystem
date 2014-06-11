@@ -22,6 +22,11 @@ public class playerSelectScreen extends JFrame {
 	static String teamName1;
 	static String teamName2;
 
+	ArrayList<playerStatParser> team1_parsers;
+	ArrayList<playerStatParser> team2_parsers;
+
+	ArrayList<team> teamMatchups = new ArrayList<team>();
+
 	public playerSelectScreen(final String teamName1, final String teamName2) {
 		this.teamName1 = teamName1;
 		this.teamName2 = teamName2;
@@ -143,14 +148,16 @@ public class playerSelectScreen extends JFrame {
 				team2PlayingPlayers = th.team2PlayingPlayers;
 				team2BenchedPlayers = th.team2BenchedPlayers;
 
-				System.out.println("playing: " + team1PlayingPlayers.toString());
-				System.out.println("benched: " + team1BenchedPlayers.toString());
-				System.out.println("playing2 : "
+				System.out.println("Playing Players: "
+						+ team1PlayingPlayers.toString());
+				System.out.println("Benched Players: "
+						+ team1BenchedPlayers.toString());
+				System.out.println("Playing 2 Players: "
 						+ team2PlayingPlayers.toString());
-				System.out.println("benched2: "
+				System.out.println("Benched 2 Players: "
 						+ team2BenchedPlayers.toString());
 
-				ArrayList<playerStatParser> team1_parsers = new ArrayList<playerStatParser>();
+				team1_parsers = new ArrayList<playerStatParser>();
 				for (String playerString : team1PlayingPlayers) {
 					try {
 						Thread.sleep(1000);
@@ -162,12 +169,11 @@ public class playerSelectScreen extends JFrame {
 							playerString));
 				}
 
-				ArrayList<playerStatParser> team2_parsers = new ArrayList<playerStatParser>();
+				team2_parsers = new ArrayList<playerStatParser>();
 				for (String playerString : team2PlayingPlayers) {
 					try {
 						Thread.sleep(1000);
 					} catch (InterruptedException e1) {
-						// TODO Auto-generated catch block
 						e1.printStackTrace();
 					}
 					team2_parsers.add(new playerStatParser(teamName2,
@@ -177,37 +183,15 @@ public class playerSelectScreen extends JFrame {
 				team team1 = new team(team1_parsers, 0, 0);
 				team team2 = new team(team2_parsers, 0, 0);
 
-				double t1Off = team1.getoRating();
-				double t1Def = team1.getdRating();
+				for (int i = 0; i < 7; i++) {
 
-				double t2Off = team2.getoRating();
-				double t2Def = team2.getdRating();
-
-				System.out.println(" 1 off: " + t1Off);
-				System.out.println(" 1 def: " + t1Def);
-
-				System.out.println(" 2 off: " + t2Off);
-				System.out.println(" 2 def: " + t2Def);
-
-				try {
-					Thread.sleep(1000);
-				} catch (InterruptedException e1) {
-					e1.printStackTrace();
+					AddMatchUp(team1, team2);
 				}
-				team1 = new team(team1_parsers, t2Off, t2Def);
-				team2 = new team(team2_parsers, t1Off, t1Def);
 
-				System.out.println("after 1 off: " + team1.getoRating());
-				System.out.println("after 1 def: " + team1.getdRating());
-
-				System.out.println("after 2 off: " + team2.getoRating());
-				System.out.println("after 2 def: " + team2.getdRating());
-
-				winScreen w= new winScreen(team1, team2);
+				winScreen w = new winScreen(teamMatchups);
 				dispose();
 			}
 
-			
 		});
 		Container cp = getContentPane();
 		panel.setPreferredSize(new Dimension(800, 640));
@@ -220,6 +204,27 @@ public class playerSelectScreen extends JFrame {
 
 		requestFocus();
 	}
+
+	public void AddMatchUp(team t1, team t2) {
+
+		double t1Off = t1.getoRating();
+		double t1Def = t1.getdRating();
+
+		double t2Off = t2.getoRating();
+		double t2Def = t2.getdRating();
+
+		try {
+			Thread.sleep(1000);
+		} catch (InterruptedException e1) {
+			e1.printStackTrace();
+		}
+		t1 = new team(team1_parsers, t2Off, t2Def);
+		t2 = new team(team2_parsers, t1Off, t1Def);
+
+		teamMatchups.add(t1);
+		teamMatchups.add(t2);
+	}
+
 }
 
 class DragPanel extends JPanel {
@@ -245,13 +250,14 @@ class Handler extends MouseAdapter {
 		System.out.println(playerSelectScreen.team1PlayingPlayers);
 		if (e.getClickCount() == 2) {
 			int index;
-			if (p.getName().contains("team1")) {
+			if (p.getName().contains("team1")) {/*
 
-				new playerStatScreen(playerSelectScreen.teamName1,
-						p.draggingLabel.getText());
-			} else {
-				new playerStatScreen(playerSelectScreen.teamName2,
-						p.draggingLabel.getText());
+												new playerStatScreen(playerSelectScreen.teamName1,
+												p.draggingLabel.getText());
+												} else {
+												new playerStatScreen(playerSelectScreen.teamName2,
+												p.draggingLabel.getText());
+												*/
 			}
 
 		}
@@ -424,4 +430,5 @@ class LabelTransferHandler extends TransferHandler {
 		src.draggingLabel = null;
 		window.setVisible(false);
 	}
+
 }

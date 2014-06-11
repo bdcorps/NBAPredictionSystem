@@ -30,9 +30,13 @@ public class playerStatParser {
 	String api2 = "8ntxr2s4bxk8wpf6wtetstnc";
 	String api3 = "8udezbnqaugun5degyjt2x8g";*/
 	
-	String api1 = "xgqa6arwxxk5n945udfsp3sy";
+	/*String api1 = "xgqa6arwxxk5n945udfsp3sy";
 	String api2 = "35sswj8wgzhwwezwegu2cdhp";
-	String api3 = "sxdvwuprdakg3j9dcbxxaut8";
+	String api3 = "sxdvwuprdakg3j9dcbxxaut8";*/
+	
+	String api1 = "pc9whj7hnagf3geer3cgm6kd";
+	String api2 = "dq4rp32vrkxx7vwah9xppdkw";
+	String api3 = "s463kmy69dt6wghhnk4q7qy7";
 	
 	int teamNodeCounter = 0;
 	String teamName = "";
