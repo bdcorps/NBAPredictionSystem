@@ -11,22 +11,26 @@ import javax.swing.text.*;
 
 public class playerSelectScreen extends JFrame {
 
-	ArrayList<String> team1PlayingPlayers = new ArrayList<String>();
+	static ArrayList<String> team1PlayingPlayers = new ArrayList<String>();
 	ArrayList<String> team1BenchedPlayers = new ArrayList<String>();
-	ArrayList<String> team2PlayingPlayers = new ArrayList<String>();
+	static ArrayList<String> team2PlayingPlayers = new ArrayList<String>();
 	ArrayList<String> team2BenchedPlayers = new ArrayList<String>();
-	
+
 	DragPanel p1 = new DragPanel();
 	DragPanel p11 = new DragPanel();
-	
 
-	public playerSelectScreen(final String teamName1,final String teamName2) {
-	
+	static String teamName1;
+	static String teamName2;
+
+	public playerSelectScreen(final String teamName1, final String teamName2) {
+		this.teamName1 = teamName1;
+		this.teamName2 = teamName2;
 		Box panel1 = Box.createVerticalBox();
 		playerStatParser v = new playerStatParser(teamName1);
 		ArrayList<String> team1AllPlayers = new ArrayList<String>();
 		team1AllPlayers = v.getPlayerNameList();
 		p1.setLayout(new BoxLayout(p1, BoxLayout.Y_AXIS));
+
 		p1.setBorder(BorderFactory.createLineBorder(Color.BLACK));
 
 		p1.setName("team1_0");
@@ -36,20 +40,6 @@ public class playerSelectScreen extends JFrame {
 			j.setAlignmentX(Component.CENTER_ALIGNMENT);
 			p1.add(j);
 		}
-		/*	
-			JLabel label1 = new JLabel("Label1");
-			p1.add(label1);
-			JLabel label2 = new JLabel("Label2");
-			p1.add(label2);
-			JLabel label3 = new JLabel(UIManager.getIcon("OptionPane.warningIcon"));
-			p1.add(label3);
-			JLabel label4 = new JLabel(UIManager.getIcon("OptionPane.errorIcon"));
-			p1.add(label4);
-			label1.setAlignmentX(Component.CENTER_ALIGNMENT);
-			label2.setAlignmentX(Component.CENTER_ALIGNMENT);
-			label3.setAlignmentX(Component.CENTER_ALIGNMENT);
-			label4.setAlignmentX(Component.CENTER_ALIGNMENT);*/
-
 		MouseListener handler = new Handler();
 		p1.addMouseListener(handler);
 		final LabelTransferHandler th = new LabelTransferHandler();
@@ -149,14 +139,16 @@ public class playerSelectScreen extends JFrame {
 		nextButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				team1PlayingPlayers = th.team1PlayingPlayers;
-				team1BenchedPlayers=th.team1BenchedPlayers;
-				team2PlayingPlayers=th.team2PlayingPlayers;
-				team2BenchedPlayers=th.team2BenchedPlayers;
-				
-				System.out.println("playing: "+team1PlayingPlayers.toString());
-				System.out.println("benched: "+team1BenchedPlayers.toString());
-				System.out.println("playing2 : "+team2PlayingPlayers.toString());
-				System.out.println("benched2: "+team2BenchedPlayers.toString());
+				team1BenchedPlayers = th.team1BenchedPlayers;
+				team2PlayingPlayers = th.team2PlayingPlayers;
+				team2BenchedPlayers = th.team2BenchedPlayers;
+
+				System.out.println("playing: " + team1PlayingPlayers.toString());
+				System.out.println("benched: " + team1BenchedPlayers.toString());
+				System.out.println("playing2 : "
+						+ team2PlayingPlayers.toString());
+				System.out.println("benched2: "
+						+ team2BenchedPlayers.toString());
 
 				ArrayList<playerStatParser> team1_parsers = new ArrayList<playerStatParser>();
 				for (String playerString : team1PlayingPlayers) {
@@ -166,9 +158,10 @@ public class playerSelectScreen extends JFrame {
 						// TODO Auto-generated catch block
 						e1.printStackTrace();
 					}
-					team1_parsers.add(new playerStatParser(teamName1,playerString));
+					team1_parsers.add(new playerStatParser(teamName1,
+							playerString));
 				}
-				
+
 				ArrayList<playerStatParser> team2_parsers = new ArrayList<playerStatParser>();
 				for (String playerString : team2PlayingPlayers) {
 					try {
@@ -177,50 +170,51 @@ public class playerSelectScreen extends JFrame {
 						// TODO Auto-generated catch block
 						e1.printStackTrace();
 					}
-					team2_parsers.add(new playerStatParser(teamName2,playerString));
+					team2_parsers.add(new playerStatParser(teamName2,
+							playerString));
 				}
 
-				team team1 = new team(team1_parsers, 0,0);
-				team team2 = new team(team2_parsers, 0,0);
-				
-				double t1Off =  team1.getoRating();
-				double t1Def =  team1.getdRating();
+				team team1 = new team(team1_parsers, 0, 0);
+				team team2 = new team(team2_parsers, 0, 0);
 
-				double t2Off =  team2.getoRating();
-				double t2Def =  team2.getdRating();
+				double t1Off = team1.getoRating();
+				double t1Def = team1.getdRating();
+
+				double t2Off = team2.getoRating();
+				double t2Def = team2.getdRating();
 
 				System.out.println(" 1 off: " + t1Off);
 				System.out.println(" 1 def: " + t1Def);
 
-						System.out.println(" 2 off: " + t2Off);
-						System.out.println(" 2 def: " + t2Def);
+				System.out.println(" 2 off: " + t2Off);
+				System.out.println(" 2 def: " + t2Def);
 
-						try {
-							Thread.sleep(1000);
-						} catch (InterruptedException e1) {
-							e1.printStackTrace();
-						}
-					 team1 = new team(team1_parsers, t2Off,t2Def);
-						 team2 = new team(team2_parsers, t1Off,t1Def);
-						
+				try {
+					Thread.sleep(1000);
+				} catch (InterruptedException e1) {
+					e1.printStackTrace();
+				}
+				team1 = new team(team1_parsers, t2Off, t2Def);
+				team2 = new team(team2_parsers, t1Off, t1Def);
 
-							System.out.println("after 1 off: " + team1.getoRating());
-							System.out.println("after 1 def: " + team1.getdRating());
-							
-							System.out.println("after 2 off: " + team2.getoRating());
-							System.out.println("after 2 def: " + team2.getdRating());
-						
+				System.out.println("after 1 off: " + team1.getoRating());
+				System.out.println("after 1 def: " + team1.getdRating());
 
+				System.out.println("after 2 off: " + team2.getoRating());
+				System.out.println("after 2 def: " + team2.getdRating());
+
+				winScreen w= new winScreen(team1, team2);
 				dispose();
-				//playerSelectScreen p = new playerSelectScreen("s", "");
 			}
+
+			
 		});
 		Container cp = getContentPane();
 		panel.setPreferredSize(new Dimension(800, 640));
 		cp.add(panel1);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // Handle the CLOSE
 														// button
-		setTitle("Triangle Solver");
+		setTitle("NBA Prediction System");
 		pack(); // pack all the components in the JFrame
 		setVisible(true); // show it
 
@@ -239,20 +233,30 @@ class DragPanel extends JPanel {
 class Handler extends MouseAdapter {
 	@Override
 	public void mousePressed(MouseEvent e) {
-		
+
 		DragPanel p = (DragPanel) e.getSource();
 		Component c = SwingUtilities.getDeepestComponentAt(p, e.getX(),
 				e.getY());
 		if (c != null && c instanceof JLabel) {
-		p.draggingLabel = (JLabel) c;
+			p.draggingLabel = (JLabel) c;
 			p.getTransferHandler().exportAsDrag(p, e, TransferHandler.MOVE);
-			
+
 		}
+		System.out.println(playerSelectScreen.team1PlayingPlayers);
 		if (e.getClickCount() == 2) {
-			new playerStatScreen(p.draggingLabel.getText());
+			int index;
+			if (p.getName().contains("team1")) {
+
+				new playerStatScreen(playerSelectScreen.teamName1,
+						p.draggingLabel.getText());
+			} else {
+				new playerStatScreen(playerSelectScreen.teamName2,
+						p.draggingLabel.getText());
 			}
-		
-		LabelTransferHandler.dragCount=0;
+
+		}
+
+		LabelTransferHandler.dragCount = 0;
 	}
 }
 
@@ -260,7 +264,7 @@ class LabelTransferHandler extends TransferHandler {
 	String draggedFrom = "";
 	DragPanel sourcePanel;
 	static int dragCount = 0;
-	
+
 	ArrayList<String> team1PlayingPlayers = new ArrayList<String>();
 	ArrayList<String> team1BenchedPlayers = new ArrayList<String>();
 	ArrayList<String> team2PlayingPlayers = new ArrayList<String>();
@@ -286,10 +290,9 @@ class LabelTransferHandler extends TransferHandler {
 					@Override
 					public void dragMouseMoved(DragSourceDragEvent dsde) {
 						dragCount++;
-						System.out.println(dragCount);
 						Point pt = dsde.getLocation();
-					
-					//	pt.translate(5, 5); // offset
+
+						// pt.translate(5, 5); // offset
 						window.setLocation(pt);
 					}
 				});
@@ -381,7 +384,7 @@ class LabelTransferHandler extends TransferHandler {
 					team1PlayingPlayers.add(src.draggingLabel.getText());
 				} else if (target.getName().toString().equals("team1_2")) {
 					team1BenchedPlayers.add(src.draggingLabel.getText());
-				}else if (target.getName().toString().equals("team2_1")) {
+				} else if (target.getName().toString().equals("team2_1")) {
 					team2PlayingPlayers.add(src.draggingLabel.getText());
 				} else if (target.getName().toString().equals("team2_2")) {
 					team2BenchedPlayers.add(src.draggingLabel.getText());

@@ -26,9 +26,14 @@ import org.xml.sax.helpers.XMLReaderFactory;
  */
 
 public class playerStatParser {
-	String api1 = "u7nqmxhtfgffubyuq28aypbf";
+	/*String api1 = "u7nqmxhtfgffubyuq28aypbf";
 	String api2 = "8ntxr2s4bxk8wpf6wtetstnc";
-	String api3 = "8udezbnqaugun5degyjt2x8g";
+	String api3 = "8udezbnqaugun5degyjt2x8g";*/
+	
+	String api1 = "xgqa6arwxxk5n945udfsp3sy";
+	String api2 = "35sswj8wgzhwwezwegu2cdhp";
+	String api3 = "sxdvwuprdakg3j9dcbxxaut8";
+	
 	int teamNodeCounter = 0;
 	String teamName = "";
 	String teamID = "";

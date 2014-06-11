@@ -375,77 +375,76 @@ abstract class player extends person {
 
 	public void calculateEfficiency() {
 		
-			fouls = flagrantFouls + personalFouls + techFouls;
-			// efficiency ratings
+		fouls = flagrantFouls + personalFouls + techFouls;
+		// efficiency ratings
 
-			if (gPlay != 0) {
-				minPG = round((double) minutesPlayed / gPlay, 2); // minutes
-																	// played
-																	// per game
-				ppg = round((double) points / gPlay * 100, 2); // point int per
-																// game
-				oRpg = round((double) offRebounds / gPlay * 100, 2); // offensive
-																		// rebounds
-																		// per
-																		// game
-				dRpg = round((double) defRebounds / gPlay * 100, 2); // defensive
-																		// rebounds
-																		// per
-																		// game
-				apg = round((double) assists / gPlay * 100, 2); // assists per
-																// game
-				spg = round((double) steals / gPlay * 100, 2); // steals per
-																// game//all
-																// fouls added
-				fpg = round((double) fouls / gPlay * 100, 2);// fouls per game
-				tpg = round((double) turnovers / gPlay * 100, 2);// turnovers
-																	// per game
-			}
-
-			if (gPlay != 0) {
-				// check the blocks: should there be bpg or blockPercent
-				bpg = round((double) blocksMade / gPlay * 100, 2); // blocks per
+		if (gPlay != 0) {
+			minPG = round((double) minutesPlayed / gPlay, 2); // minutes
+																// played
+																// per game
+			ppg = round((double) points / gPlay, 2); // point int per
+															// game
+			oRpg = round((double) offRebounds / gPlay, 2); // offensive
+																	// rebounds
+																	// per
 																	// game
-			}
+			dRpg = round((double) defRebounds / gPlay, 2); // defensive
+																	// rebounds
+																	// per
+																	// game
+			apg = round((double) assists / gPlay, 2); // assists per
+															// game
+			spg = round((double) steals / gPlay, 2); // steals per
+															// game//all
+															// fouls added
+			fpg = round((double) fouls / gPlay, 2);// fouls per game
+			tpg = round((double) turnovers / gPlay, 2);// turnovers
+																// per game
+		}
 
-			if (blockAttempt != 0) {
-				blockPercent = round((double) blocksMade / blockAttempt * 100,
-						2);
-			} else {
-				blockPercent = 0;
-			}
+		if (gPlay != 0) {
+			// check the blocks: should there be bpg or blockPercent
+			bpg = round((double) blocksMade / gPlay, 2); // blocks per
+																// game
+		}
 
-			if (fgAttempt != 0) {
-				fgPercent = round((double) fgMade / fgAttempt * 100, 2); // field
-																			// goal
-																			// percentage
-			} else {
-				fgPercent = 0;
-			}
-			if (ftAttempt != 0) {
-				ftPercent = round((double) ftMade / ftAttempt * 100, 2); // free
-																			// throw
-																			// percentage
-			} else {
-				ftPercent = 0;
-			}
-			if (threeptAttempt != 0) {
-				threeptPercent = round((double) threeptMade / threeptAttempt
-						* 100, 2); // 3 point percentage
-			} else {
-				threeptPercent = 0;
-			}
-			if (twoptAttempt != 0) {
-				twoptPercent = round((double) twoptMade / twoptAttempt * 100, 2);// 3
-																					// point
-																					// percentage
-			} else {
-				twoptPercent = 0;
-			}
+		if (blockAttempt != 0) {
+			blockPercent = round((double) blocksMade / blockAttempt * 100,
+					2);
+		} else {
+			blockPercent = 0;
+		}
 
-		
-	}
+		if (fgAttempt != 0) {
+			fgPercent = round((double) fgMade / fgAttempt * 100, 2); // field
+																		// goal
+																		// percentage
+		} else {
+			fgPercent = 0;
+		}
+		if (ftAttempt != 0) {
+			ftPercent = round((double) ftMade / ftAttempt * 100, 2); // free
+																		// throw
+																		// percentage
+		} else {
+			ftPercent = 0;
+		}
+		if (threeptAttempt != 0) {
+			threeptPercent = round((double) threeptMade / threeptAttempt
+					* 100, 2); // 3 point percentage
+		} else {
+			threeptPercent = 0;
+		}
+		if (twoptAttempt != 0) {
+			twoptPercent = round((double) twoptMade / twoptAttempt * 100, 2);// 3
+																				// point
+																				// percentage
+		} else {
+			twoptPercent = 0;
+		}
+
 	
+}
 	public ArrayList<String> getPersonalStats(){
 		 ArrayList<String> personalStats = new ArrayList<String>();
 		personalStats.add(name);		personalStats.add(String.valueOf(height));		personalStats.add(String.valueOf(weight));

@@ -45,11 +45,10 @@ public class mainScreen extends JFrame implements ActionListener {
 		Box panel2 = Box.createVerticalBox();
 		Box panel3 = Box.createVerticalBox();
 
-		String[] petStrings = { "Boston Celtics", "Brooklyn Nets",
+		String[] teams = { "Boston Celtics", "Brooklyn Nets",
 				"New York Knicks", "Philadelphia 76ers", "Toronto Raptors",
 				"Chicago Bulls", "Cleveland Cavaliers", "Detroit Pistons",
-				"Indiana Pacers", "Milwaukee Bucks", "Atlanta Hawks",
-				"Charlotte Bobcats", "Miami Heat", "Orlando Magic",
+				"Indiana Pacers", "Milwaukee Bucks", "Atlanta Hawks", "Miami Heat", "Orlando Magic",
 				"Washington Wizards", "Dallas Mavericks", "Houston Rockets",
 				"Memphis Grizzlies", "New Orleans Pelicans",
 				"San Antonio Spurs", "Denver Nuggets",
@@ -100,7 +99,7 @@ public class mainScreen extends JFrame implements ActionListener {
 		panel1.setBorder(BorderFactory.createEmptyBorder(30, 30, 30, 30));
 		panel2.setBorder(BorderFactory.createEmptyBorder(30, 30, 30, 30));
 
-		final JComboBox team1_list = new JComboBox(petStrings);
+		final JComboBox team1_list = new JComboBox(teams);
 		team1_list.setSelectedIndex(0);
 		team1_list.addActionListener(new ActionListener() {//add actionlistner to listen for change
 		    @Override
@@ -115,7 +114,7 @@ public class mainScreen extends JFrame implements ActionListener {
 		team1_image = new JLabel();
 		team1_image.setFont(team1_image.getFont().deriveFont(Font.ITALIC));
 		team1_image.setHorizontalAlignment(JLabel.CENTER);
-		updateLabel(petStrings[team1_list.getSelectedIndex()], team1_image);
+		updateLabel(teams[team1_list.getSelectedIndex()], team1_image);
 		team1_image.setBorder(BorderFactory.createEmptyBorder(0, 0, 50, 0));
 		team1_image.setPreferredSize(new Dimension(icon.getIconWidth(), icon
 				.getIconHeight()));
@@ -125,8 +124,8 @@ public class mainScreen extends JFrame implements ActionListener {
 		panel1.add(team1_image);
 		panel1.add(team1_list);
 
-		final JComboBox team2_list = new JComboBox(petStrings);
-		team2_list.setSelectedIndex(0);
+		final JComboBox team2_list = new JComboBox(teams);
+		team2_list.setSelectedIndex(1);
 		team2_list.addActionListener(new ActionListener() {//add actionlistner to listen for change
 		    @Override
 		    public void actionPerformed(ActionEvent e) {
@@ -141,7 +140,7 @@ public class mainScreen extends JFrame implements ActionListener {
 		team2_image = new JLabel();
 		team2_image.setFont(team2_image.getFont().deriveFont(Font.ITALIC));
 		team2_image.setHorizontalAlignment(JLabel.CENTER);
-		updateLabel(petStrings[team2_list.getSelectedIndex()], team2_image);
+		updateLabel(teams[team2_list.getSelectedIndex()], team2_image);
 		team2_image.setBorder(BorderFactory.createEmptyBorder(0, 0, 50, 0));
 
 		team2_image.setPreferredSize(new Dimension(icon.getIconWidth(), icon
@@ -183,8 +182,7 @@ public class mainScreen extends JFrame implements ActionListener {
 		panel3.setOpaque(true);   
 		panel3.setBackground(Color.WHITE); 
 		
-		Container cp = getContentPane();
-	
+		Container cp = getContentPane();	
 
 		cp.add(panel3);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // Handle the CLOSE
@@ -202,7 +200,7 @@ public class mainScreen extends JFrame implements ActionListener {
 	protected void updateLabel(String name, JLabel imgIcon) {
 		icon = createImageIcon("team_images/" + name + ".jpg");
 
-		imgIcon.setIcon(scale(icon.getImage(), 0.35));
+		imgIcon.setIcon(scale(icon.getImage(),0.35));
 		imgIcon.setToolTipText("A drawing of a " + name.toLowerCase());
 		if (icon != null) {
 			imgIcon.setText(null);
