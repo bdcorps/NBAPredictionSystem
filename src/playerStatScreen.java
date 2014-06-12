@@ -1,3 +1,4 @@
+import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Container;
@@ -5,6 +6,7 @@ import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Graphics2D;
 import java.awt.Image;
+import java.awt.SystemTray;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
@@ -13,13 +15,15 @@ import java.util.Collections;
 
 import javax.swing.BorderFactory;
 import javax.swing.Box;
+import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.SwingUtilities;
 
-public class playerStatScreen extends JFrame {
+public class playerStatScreen extends JFrame implements ActionListener {
 	JLabel team1_image;
 	center p = new center();
 	playerStatParser sp;
@@ -29,7 +33,6 @@ public class playerStatScreen extends JFrame {
 	boolean error = false;
 	
 	public playerStatScreen(String teamName, String playerName) {
-		System.out.println(teamName + " " + playerName);
 		JPanel panel = new JPanel();
 		
 		sp =new playerStatParser(teamName,playerName);
@@ -41,7 +44,7 @@ public class playerStatScreen extends JFrame {
 				error = true;
 			} else {
 				setPlayerStats(p);
-				// p_team1_1.calculateEfficiency();
+			p.calculateEfficiency();
 				// p_team1_1_per = p_team1_1.getPersonalStats();
 				// p_team1_1_def= p_team1_1.getDefensiveStats();
 			}
@@ -53,35 +56,67 @@ public class playerStatScreen extends JFrame {
 		Box b3 = Box.createVerticalBox();
 		
 		panel.setPreferredSize(new Dimension(800, 640));
-//a.setBorder(BorderFactory.createLineBorder(Color.BLACK));
 		team1_image = new JLabel();
 		team1_image.setFont(team1_image.getFont().deriveFont(Font.ITALIC));
 		team1_image.setHorizontalAlignment(JLabel.CENTER);
 		updateLabel(teamName, playerName, team1_image);
 
-	//	team1_image.setBorder(BorderFactory.createEmptyBorder(0, 0, 50, 0));
+		b2.setBorder(BorderFactory.createLineBorder(Color.BLACK));
 
 		team1_image.setAlignmentX(Component.CENTER_ALIGNMENT);
 
-		b1.add(team1_image);
-		b1.add(new JLabel(playerName));
+a.add(Box.createRigidArea(new Dimension(0,200)));
+		b2.setAlignmentX(CENTER_ALIGNMENT);
+		b2.add(team1_image);
+		JLabel pNameLabel = new JLabel(playerName);
 
-		a.add(b1);
-		JButton nextButton = new JButton("Back");
-		nextButton.setAlignmentX(Component.CENTER_ALIGNMENT);
-		a.add(nextButton);
+		b2.add(pNameLabel);
+		pNameLabel.setFont(new Font("Serif", Font.PLAIN, 14));
 		
-		nextButton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
+		b3.add(new JLabel("Team: "+p.getTeam()));
+		b3.add(new JLabel("Birthdate: "+p.getBirthdate()));
+		b3.add(new JLabel("Birth Place: "+p.getBirthPlace()));
+		b3.add(new JLabel("Experience: "+String.valueOf(p.getExperience())));
 
-			}
-		});
+b3.add(Box.createRigidArea(new Dimension(0,15)));
+		b3.add(new JLabel("Offensive Stats"));
+		b3.add(new JLabel("Points Per Game: "+String.valueOf((p.getPpg()))));
+		b3.add(new JLabel("Assists Per Game: "+String.valueOf(p.getApg())));
+		b3.add(new JLabel("Offensive Rebounds Per Game: "+String.valueOf(p.getoRpg())));
+		b3.add(new JLabel("Turnovers Per Game: "+String.valueOf(p.getTpg())));
+		b3.add(new JLabel("Field Goal Percent: "+String.valueOf(p.getFgPercent())));
+		b3.add(new JLabel("Free Throws Percent: "+String.valueOf(p.getFtPercent())));
+		b3.add(new JLabel("2 Point Percent: "+String.valueOf(p.getTwoptPercent())));
+		b3.add(new JLabel("3 Point Percent: "+String.valueOf(p.getThreeptPercent())));
+
+b3.add(Box.createRigidArea(new Dimension(0,15)));
+		b3.add(new JLabel("Defensive Stats"));
+		b3.add(new JLabel("Defensive Rebounds Per Game: "+String.valueOf(p.getdRpg())));
+		b3.add(new JLabel("Fouls Per Game: "+ String.valueOf(p.getFpg())));
+		b3.add(new JLabel("Block Percent: "+String.valueOf(p.getBlockPercent())));
+		b3.add(new JLabel("Steals Per Game: "+String.valueOf(p.getSpg())));
+		
+		
+		b1.add(b2);
+
+b1.add(Box.createRigidArea(new Dimension(70,0)));
+
+		b1.add(b3);
+		a.add(b1);
+		JButton backButton = new JButton("Back");
+		backButton.setAlignmentX(Component.CENTER_ALIGNMENT);
+		a.add(backButton);
+		backButton.addActionListener(this);
+
+		panel.setLayout(new BoxLayout(panel, BoxLayout.X_AXIS));
+		panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
 		panel.add(a);
+		panel.setBackground(Color.WHITE);
 		Container cp = getContentPane();
 		cp.add(panel);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // Handle the CLOSE
 														// button
-		setTitle("Triangle Solver");
+		setTitle("NBA Predicton System");
 		pack(); // pack all the components in the JFrame
 		setVisible(true); // show it
 
@@ -94,12 +129,11 @@ public class playerStatScreen extends JFrame {
 		int spaceIndex = 0;
 		spaceIndex = name.indexOf(" ");
 		name= (name.substring(spaceIndex+1)+(" ")+(name.substring(0 , spaceIndex)));
-
-		
+try{
 		icon = createImageIcon("headshots/" + teamName+ "/"+name + ".png");
+		}catch(Exception ex){
+		}
 
-		imgIcon.setIcon(scale(icon.getImage(), 1));
-		imgIcon.setToolTipText("A drawing of a " + name.toLowerCase());
 		if (icon != null) {
 			imgIcon.setText(null);
 		} else {
@@ -300,6 +334,11 @@ public class playerStatScreen extends JFrame {
 			}
 
 		}
+	}
+
+	@Override
+	public void actionPerformed(ActionEvent arg0) {
+		this.setVisible(false);
 	}
 
 }

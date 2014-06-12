@@ -38,9 +38,6 @@ public class winScreen extends JFrame {
 	Box a;
 
 	public winScreen(ArrayList<team> teamMatchups) {
-
-		
-		
 		a = Box.createVerticalBox();
 		a1 = Box.createHorizontalBox();
 		
@@ -127,6 +124,9 @@ public class winScreen extends JFrame {
 		String columnNames[] = { "Name", "Exp", "Pts", "Ast", "OR", "TOV",
 				"FG%", "FT%", "3PT%", "2PT%", "DR", "Fls", "Blk", "Stl" };
 
+		points1=0;
+		points2=0;
+		
 		topPanel = Box.createVerticalBox();
 		dataValues = new String[5][14];
 		setTable(team1);

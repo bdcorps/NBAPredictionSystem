@@ -18,11 +18,6 @@ public class team {
 	powerForward p_team1_3 = new powerForward();
 	pointGuard p_team1_4 = new pointGuard();
 	shootingGuard p_team1_5 = new shootingGuard();
-	center p_team1_6 = new center();
-	smallForward p_team1_7 = new smallForward();
-	powerForward p_team1_8 = new powerForward();
-	pointGuard p_team1_9 = new pointGuard();
-	shootingGuard p_team1_10 = new shootingGuard();
 
 	ArrayList<String> p_team1_1_per = new ArrayList<String>();
 	ArrayList<Double> p_team1_1_off = new ArrayList<Double>();
@@ -475,16 +470,6 @@ public class team {
 		}
 	}
 
-	/*
-		public int valueMod(int d, double modFactor) {double modded =d;
-			if (modFactor!=0){
-				modFactor = d + (d * (1-modFactor));
-				 		if(modFactor>0.5){
-				 			modFactor = modFactor * -1;
-				 		}
-				 		modded = d+  modFactor;
-			}return (int)modded;
-		}*/
 	public Random randomGenerator;
 	public double random;
 
@@ -492,9 +477,8 @@ public class team {
 		double modded = d;
 		if (modFactor != 0) {
 			randomGenerator = new Random();
-			random = randomGenerator.nextDouble() + 0.75;
-			// modded = (d + (d * (0.5-(modFactor))));
-			modded = (d + (d * (0.5 - (modFactor)))) * (random);
+			random = randomGenerator.nextGaussian() + 1;
+			modded = (d + (d *2* (0.5 - (modFactor)))* (random));
 		}
 		return (int) modded;
 	}

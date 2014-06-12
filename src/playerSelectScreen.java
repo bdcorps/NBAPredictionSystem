@@ -51,8 +51,13 @@ public class playerSelectScreen extends JFrame {
 
 		p1.setTransferHandler(th);
 		JPanel p = new JPanel(new GridLayout(1, 2));
-		p.add(p1);
-
+		JPanel p5 = new JPanel();
+		p5.setLayout(new BorderLayout());
+		JLabel l =new JLabel("Available Players:");
+		l.setAlignmentX(CENTER_ALIGNMENT);
+		p5.add(l,BorderLayout.NORTH);
+		p5.add(p1);
+		p.add(p5);
 		JPanel pp = new JPanel(new GridLayout(0, 1));
 
 		DragPanel p2 = new DragPanel();
@@ -60,7 +65,15 @@ public class playerSelectScreen extends JFrame {
 		p2.setBorder(BorderFactory.createLineBorder(Color.BLACK));
 		p2.addMouseListener(handler);
 		p2.setTransferHandler(th);
-		pp.add(p2);
+		
+		JPanel p7 = new JPanel();
+		p7.setLayout(new BorderLayout());
+		JLabel l4 =new JLabel("Playing:");
+		p7.add(l4,BorderLayout.NORTH);
+		p7.add(p2);		
+		
+		pp.add(p7);
+		
 		p2.setName("team1_1");
 
 		JPanel panel = new JPanel(new GridLayout(1, 0));
@@ -72,8 +85,15 @@ public class playerSelectScreen extends JFrame {
 		a.addMouseListener(handler);
 		a.setTransferHandler(th);
 
+		JPanel p8 = new JPanel();
+		p8.setLayout(new BorderLayout());
+		JLabel l5 =new JLabel("Benched:");
+		p8.add(l5,BorderLayout.NORTH);
+		p8.add(a);		
+		
+		pp.add(p8);
+
 		a.setName("team1_2");
-		pp.add(a);
 
 		panel.add(p);
 
@@ -98,24 +118,19 @@ public class playerSelectScreen extends JFrame {
 		p11.setName("team2_0");
 		p11.setLayout(new BoxLayout(p11, BoxLayout.Y_AXIS));
 		p11.setBorder(BorderFactory.createLineBorder(Color.BLACK));
-		/*JLabel label11 = new JLabel("Label1");
-		p11.add(label11);
-		JLabel label21 = new JLabel("Label2");
-		p11.add(label21);
-		JLabel label31 = new JLabel(UIManager.getIcon("OptionPane.warningIcon"));
-		p11.add(label31);
-		JLabel label41 = new JLabel(UIManager.getIcon("OptionPane.errorIcon"));
-		p11.add(label41);
-		label11.setAlignmentX(Component.CENTER_ALIGNMENT);
-		label21.setAlignmentX(Component.CENTER_ALIGNMENT);
-		label31.setAlignmentX(Component.CENTER_ALIGNMENT);
-		label41.setAlignmentX(Component.CENTER_ALIGNMENT);*/
 
 		MouseListener handler1 = new Handler();
 		p11.addMouseListener(handler1);
 		LabelTransferHandler th1 = new LabelTransferHandler();
 		p11.setTransferHandler(th);
-		b.add(p11);
+		
+		JPanel p6 = new JPanel();
+		p6.setLayout(new BorderLayout());
+		JLabel l1 =new JLabel("Available Players:");
+		p6.add(l1,BorderLayout.NORTH);
+		p6.add(p11);
+		
+		b.add(p6);
 
 		JPanel m = new JPanel(new GridLayout(0, 1));
 		DragPanel a11 = new DragPanel();
@@ -124,15 +139,36 @@ public class playerSelectScreen extends JFrame {
 		a11.addMouseListener(handler);
 		a11.setTransferHandler(th);
 		a11.setName("team2_1");
-
+		
+		JPanel p9 = new JPanel();
+		p9.setLayout(new BorderLayout());
+		JLabel l6=new JLabel("Playing:");
+		p9.add(l6,BorderLayout.NORTH);
+		p9.add(a11);		
+		
+		m.add(p9);
+		
 		DragPanel a111 = new DragPanel();
 		a111.setLayout(new BoxLayout(a111, BoxLayout.Y_AXIS));
 		a111.setBorder(BorderFactory.createLineBorder(Color.BLACK));
 		a111.addMouseListener(handler);
 		a111.setTransferHandler(th);
 		a111.setName("team2_2");
-		m.add(a11);
-		m.add(a111);
+
+		JPanel jp1 = new JPanel();
+		jp1.setLayout(new BorderLayout());
+		JLabel l7=new JLabel("Benched:");
+		jp1.add(l7,BorderLayout.NORTH);
+	
+		
+		jp1.add(a111);
+		
+		
+		
+		
+		m.add(jp1);
+		
+		
 		b.add(m);
 		panel.add(b);
 
@@ -162,7 +198,6 @@ public class playerSelectScreen extends JFrame {
 					try {
 						Thread.sleep(1000);
 					} catch (InterruptedException e1) {
-						// TODO Auto-generated catch block
 						e1.printStackTrace();
 					}
 					team1_parsers.add(new playerStatParser(teamName1,
@@ -184,7 +219,6 @@ public class playerSelectScreen extends JFrame {
 				team team2 = new team(team2_parsers, 0, 0);
 
 				for (int i = 0; i < 7; i++) {
-
 					AddMatchUp(team1, team2);
 				}
 
@@ -195,6 +229,7 @@ public class playerSelectScreen extends JFrame {
 		});
 		Container cp = getContentPane();
 		panel.setPreferredSize(new Dimension(800, 640));
+		
 		cp.add(panel1);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // Handle the CLOSE
 														// button
@@ -250,14 +285,13 @@ class Handler extends MouseAdapter {
 		System.out.println(playerSelectScreen.team1PlayingPlayers);
 		if (e.getClickCount() == 2) {
 			int index;
-			if (p.getName().contains("team1")) {/*
-
+			if (p.getName().contains("team1")) {
 												new playerStatScreen(playerSelectScreen.teamName1,
 												p.draggingLabel.getText());
 												} else {
 												new playerStatScreen(playerSelectScreen.teamName2,
 												p.draggingLabel.getText());
-												*/
+												
 			}
 
 		}
@@ -386,18 +420,31 @@ class LabelTransferHandler extends TransferHandler {
 				l.setText(src.draggingLabel.getText());
 				l.setAlignmentX(Component.CENTER_ALIGNMENT);
 
-				if (target.getName().toString().equals("team1_1")) {
-					team1PlayingPlayers.add(src.draggingLabel.getText());
-				} else if (target.getName().toString().equals("team1_2")) {
-					team1BenchedPlayers.add(src.draggingLabel.getText());
-				} else if (target.getName().toString().equals("team2_1")) {
-					team2PlayingPlayers.add(src.draggingLabel.getText());
-				} else if (target.getName().toString().equals("team2_2")) {
-					team2BenchedPlayers.add(src.draggingLabel.getText());
-				}
-
 				target.add(l);
 				target.revalidate();
+
+				if (target.getName().toString().equals("team1_1")) {	team1PlayingPlayers.clear();
+					for (int i = 0; i < target.getComponentCount(); i++) {
+					
+						String temp =((JLabel)target.getComponent(i)).getText();
+						team1PlayingPlayers.add(temp);
+					}
+				} else if (target.getName().toString().equals("team1_2")) {team1BenchedPlayers.clear();
+					for (int i = 0; i < target.getComponentCount(); i++) {
+						String temp =((JLabel)target.getComponent(i)).getText();
+						team1BenchedPlayers.add(temp);
+					}
+				} else if (target.getName().toString().equals("team2_1")) {			team2PlayingPlayers.clear();
+					for (int i = 0; i < target.getComponentCount(); i++) {
+						String temp =((JLabel)target.getComponent(i)).getText();
+						team2PlayingPlayers.add(temp);
+					}
+				} else if (target.getName().toString().equals("team2_2")) {team2BenchedPlayers.clear();
+					for (int i = 0; i < target.getComponentCount(); i++) {
+						String temp =((JLabel)target.getComponent(i)).getText();
+						team2BenchedPlayers.add(temp);
+					}
+				}
 			} else {
 				sendBack(sourcePanel, src.draggingLabel.getText());
 			}

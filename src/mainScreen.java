@@ -1,4 +1,3 @@
-import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Container;
@@ -9,14 +8,16 @@ import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 
+import javax.imageio.ImageIO;
 import javax.swing.BorderFactory;
 import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
-import javax.swing.JComponent;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -59,43 +60,6 @@ public class mainScreen extends JFrame implements ActionListener {
 
 		
 		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		/*
-		 * 
-		 * 
-		 * 
-		 * 
-		 * 
-		 * 
-		 * 
-		 * 
-		 * 
-		 * 
-		 * 
-		 * 
-		 * 
-		 * 
-		 * 
-		 * 
-		 * 
-		 * 
-		 * 
-		 * 
-		 * REMEMBER
-		 * 
-		 * minute played shit
-		 * 
-		 */
 		panel1.setBorder(BorderFactory.createEmptyBorder(30, 30, 30, 30));
 		panel2.setBorder(BorderFactory.createEmptyBorder(30, 30, 30, 30));
 
@@ -184,10 +148,12 @@ public class mainScreen extends JFrame implements ActionListener {
 		
 		Container cp = getContentPane();	
 
+	//	this.setIconImage(new ImageIcon("C://Users//Sukhpal//SkyDrive//workspace//NBA Prediction System//src//sukhpal2_icon.gif").getImage());
+		
 		cp.add(panel3);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // Handle the CLOSE
 														// button
-		setTitle("Triangle Solver");
+		setTitle("NBA Prediction System");
 		pack(); // pack all the components in the JFrame
 		setVisible(true); // show it
 
