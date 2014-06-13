@@ -62,12 +62,12 @@ public class playerStatScreen extends JFrame implements ActionListener {
 		updateLabel(teamName, playerName, team1_image);
 
 		b2.setBorder(BorderFactory.createLineBorder(Color.BLACK));
-
 		team1_image.setAlignmentX(Component.CENTER_ALIGNMENT);
 
 a.add(Box.createRigidArea(new Dimension(0,200)));
 		b2.setAlignmentX(CENTER_ALIGNMENT);
 		b2.add(team1_image);
+		
 		JLabel pNameLabel = new JLabel(playerName);
 
 		b2.add(pNameLabel);
@@ -131,14 +131,12 @@ b1.add(Box.createRigidArea(new Dimension(70,0)));
 		name= (name.substring(spaceIndex+1)+(" ")+(name.substring(0 , spaceIndex)));
 try{
 		icon = createImageIcon("headshots/" + teamName+ "/"+name + ".png");
+
+		imgIcon.setIcon(scale(icon.getImage(), 1));
+		
 		}catch(Exception ex){
 		}
 
-		if (icon != null) {
-			imgIcon.setText(null);
-		} else {
-			imgIcon.setText("Image not found");
-		}
 	}
 
 	private ImageIcon scale(Image src, double scale) {

@@ -21,8 +21,8 @@ public class main {
 	team1_parsers = new ArrayList<playerStatParser>();
 	team2_parsers = new ArrayList<playerStatParser>();
 
-		playerStatParser sp_team1_1 = new playerStatParser("San Antonio Spurs",
-				"Kawhi Leonard");
+		playerStatParser sp_team1_1 = new playerStatParser("Miami Heat",
+				"LeBron James");
 		try {
 			Thread.sleep(sleepTime);
 		} catch (InterruptedException e) {
@@ -30,8 +30,8 @@ public class main {
 			e.printStackTrace();
 		}
 
-		playerStatParser sp_team1_2 = new playerStatParser("San Antonio Spurs",
-				"Tim Duncan");
+		playerStatParser sp_team1_2 = new playerStatParser("Miami Heat",
+				"Chris Andersen");
 		try {
 			Thread.sleep(sleepTime);
 		} catch (InterruptedException e) {
@@ -39,8 +39,8 @@ public class main {
 			e.printStackTrace();
 		}
 
-		playerStatParser sp_team1_3 = new playerStatParser("San Antonio Spurs",
-				"Tony Parker");
+		playerStatParser sp_team1_3 = new playerStatParser("Miami Heat",
+				"Chris Bosh");
 		try {
 			Thread.sleep(sleepTime);
 		} catch (InterruptedException e) {
@@ -48,8 +48,8 @@ public class main {
 			e.printStackTrace();
 		}
 
-		playerStatParser sp_team1_4 = new playerStatParser("San Antonio Spurs",
-				"Boris Diaw");
+		playerStatParser sp_team1_4 = new playerStatParser("Miami Heat",
+				"Mario Chalmers");
 		try {
 			Thread.sleep(sleepTime);
 		} catch (InterruptedException e) {
@@ -57,8 +57,8 @@ public class main {
 			e.printStackTrace();
 		}
 
-		playerStatParser sp_team1_5 = new playerStatParser("San Antonio Spurs",
-				"Danny Green");
+		playerStatParser sp_team1_5 = new playerStatParser("Miami Heat",
+				"Dwyane Wade");
 
 		team1_parsers.add(sp_team1_1);
 		team1_parsers.add(sp_team1_2);
@@ -71,8 +71,8 @@ public class main {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		playerStatParser sp_team2_1 = new playerStatParser("Miami Heat",
-				"LeBron James");
+		playerStatParser sp_team2_1 = new playerStatParser("Indiana Pacers",
+				"Paul George");
 		try {
 			Thread.sleep(sleepTime);
 		} catch (InterruptedException e) {
@@ -80,8 +80,8 @@ public class main {
 			e.printStackTrace();
 		}
 
-		playerStatParser sp_team2_2 = new playerStatParser("Miami Heat",
-				"Chris Bosh");
+		playerStatParser sp_team2_2 = new playerStatParser("Indiana Pacers",
+				"Roy Hibbert");
 		try {
 			Thread.sleep(sleepTime);
 		} catch (InterruptedException e) {
@@ -89,8 +89,8 @@ public class main {
 			e.printStackTrace();
 		}
 
-		playerStatParser sp_team2_3 = new playerStatParser("Miami Heat",
-				"Dwyane Wade");
+		playerStatParser sp_team2_3 = new playerStatParser("Indiana Pacers",
+				"Lance Stephenson");
 		try {
 			Thread.sleep(sleepTime);
 		} catch (InterruptedException e) {
@@ -98,8 +98,8 @@ public class main {
 			e.printStackTrace();
 		}
 
-		playerStatParser sp_team2_4 = new playerStatParser("Miami Heat",
-				"Rashard Lewis");
+		playerStatParser sp_team2_4 = new playerStatParser("Indiana Pacers",
+				"Andrew Bynum");
 		try {
 			Thread.sleep(sleepTime);
 		} catch (InterruptedException e) {
@@ -107,8 +107,8 @@ public class main {
 			e.printStackTrace();
 		}
 
-		playerStatParser sp_team2_5 = new playerStatParser("Miami Heat",
-				"Mario Chalmers");
+		playerStatParser sp_team2_5 = new playerStatParser("Indiana Pacers",
+				"George Hill");
 
 		team2_parsers.add(sp_team2_1);
 		team2_parsers.add(sp_team2_2);

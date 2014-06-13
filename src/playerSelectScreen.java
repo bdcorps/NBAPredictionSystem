@@ -218,12 +218,19 @@ public class playerSelectScreen extends JFrame {
 				team team1 = new team(team1_parsers, 0, 0);
 				team team2 = new team(team2_parsers, 0, 0);
 
+				
 				for (int i = 0; i < 7; i++) {
 					AddMatchUp(team1, team2);
 				}
 
 				winScreen w = new winScreen(teamMatchups);
+				levelPoints(team1.p_team1_1.getPoints(), team1.p_team1_1.getPoints());
 				dispose();
+			}
+
+			private void levelPoints(double ppg, double ppg2) {
+		System.out.println("ppg: "+String.valueOf(ppg2 -ppg));
+				
 			}
 
 		});

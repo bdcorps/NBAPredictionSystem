@@ -151,8 +151,6 @@ public class winScreen extends JFrame {
 
 		col.setPreferredWidth(width);
 
-		// ////////////
-
 		dataValues = new String[5][14];
 		setTable(team2);
 
@@ -171,7 +169,11 @@ public class winScreen extends JFrame {
 		scrollPane2.setPreferredSize(new Dimension(700, 140));
 		scrollPane.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
 		scrollPane2.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
-		topPanel.add(new JLabel(String.valueOf(points1 + "  -  " + points2)), BorderLayout.EAST);
+		
+		JLabel label1 = new JLabel(String.valueOf(points1 + "  -  " + points2));
+		label1.setFont(new Font("Segoe UI", Font.BOLD, 12));
+		
+		topPanel.add(label1, BorderLayout.EAST);
 
 		JLabel tLabel1 = new JLabel(team1.p_team1_1.getTeam());
 		topPanel.add(tLabel1);

@@ -8,7 +8,7 @@ public class team {
 	ArrayList<String> StatsValueList = new ArrayList<String>();
 
 	player[] p_team_playing5 = new player[5];
-
+double mid;
 	boolean error = false;
 
 	center sp = new center();
@@ -65,6 +65,8 @@ public class team {
 		this.offRating = offRating;
 		this.defRating = defRating;
 
+		mid= (offRating+defRating)/2;
+		
 		sp_team1_1 = playerParsers.get(0);
 		sp_team1_2 = playerParsers.get(1);
 		sp_team1_3 = playerParsers.get(2);
@@ -410,7 +412,7 @@ public class team {
 					refToKeep.add(ind);
 					break;
 				case "points":
-					p.setPoints(valueMod(
+					p.setPoints(pointMod(
 							(int) Double.parseDouble(StatsValueList.get(ind)),
 							defRating));
 					refToKeep.add(ind);
@@ -477,9 +479,24 @@ public class team {
 		double modded = d;
 		if (modFactor != 0) {
 			randomGenerator = new Random();
-			random = randomGenerator.nextGaussian() + 1;
-			modded = (d + (d *2* (0.5 - (modFactor)))* (random));
+			random = (randomGenerator.nextDouble())-0.0015 ;
+			// modded = (d + (d * (0.5-(modFactor))));
+			modded = (d- (d * (0.5 - (modFactor))))*random;
 		}
+
 		return (int) modded;
+	}
+	
+	private int pointMod(int d, double modFactor) {
+		double modded = d;
+if (modFactor != 0) {
+			randomGenerator = new Random();
+			random = ((randomGenerator.nextInt(5)-3));
+			// modded = (d + (d * (0.5-(modFactor))));
+			
+			modded = (d- (d * ((modFactor))))*random*0.85;
+		}
+ modded = (d + (d * (mid-(modFactor)))*2*random);
+		return (int) (modded * 1.35);
 	}
 }

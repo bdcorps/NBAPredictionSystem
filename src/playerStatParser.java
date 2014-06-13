@@ -25,8 +25,8 @@ import org.xml.sax.helpers.XMLReaderFactory;
  * Last Modified: 10-05-2014 at 2:20 PM
  */
 
-public class playerStatParser {
-	/*String api1 = "u7nqmxhtfgffubyuq28aypbf";
+public class playerStatParser {/*
+	String api1 = "u7nqmxhtfgffubyuq28aypbf";
 	String api2 = "8ntxr2s4bxk8wpf6wtetstnc";
 	String api3 = "8udezbnqaugun5degyjt2x8g";*/
 	
@@ -37,11 +37,26 @@ public class playerStatParser {
 	/*
 	String api1 = "pc9whj7hnagf3geer3cgm6kd";
 	String api2 = "dq4rp32vrkxx7vwah9xppdkw";
-	String api3 = "s463kmy69dt6wghhnk4q7qy7";*/
+	String api3 = "s463kmy69dt6wghhnk4q7qy7";
+	*/
 	
+	/*
 	String api1 = "ymzzdn6bjwphybmgkwmwdzud";
 	String api2 = "6awtta5c62wr7xrxvw7mzhep";
-	String api3 = "yacpc73edychk9x6qsm4b4fz";
+	String api3 = "yacpc73edychk9x6qsm4b4fz";*/
+
+	/*String api1 = "6y8mvhag3x55e7f6nhk7m8ay";
+	String api2 = "7jhte5q6n7cdx4mxfzra87vw";
+	String api3 = "sjg27gghpbfzna6q4k7rcx9g";*/
+	/*
+	String api1 = "z2bdkvpbvh9peax6m3nysv5p";
+	String api2 = "uvbz9dnz6qw5dnfu47vmeses";
+	String api3 = "snwbd3f5x5rasu6p58yzyjgm";
+	*/
+	
+	String api1 = "pvu6xt8ad9uyvvcd7suq7ryf";
+	String api2 = "ucmrmabjr3xu9e9qp6xr37bp";
+	String api3 = "ruedbqhzbq5gw9x2zw4ysfsd";
 	
 	int teamNodeCounter = 0;
 	String teamName = "";
